@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:testly/config/di/di.config.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
     
