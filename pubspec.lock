@@ -169,22 +169,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.7"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: ea2bad3c89a27635ce2d85cce4d6b199da49a5a48ec77b03e45b65a3b90922b0
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.10.0"
-  dio_web_adapter:
-    dependency: transitive
-    description:
-      name: dio_web_adapter
-      sha256: dd58dc3861eb36edb13b217efc006a1c21e5bbc341de8c229b85634fa5e362e4
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   fake_async:
     dependency: transitive
     description:
@@ -308,21 +292,13 @@ packages:
     source: hosted
     version: "1.0.5"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       sha256: "2a743920d81b7910627f68ee2c9ac1fc0bfee32b9fc3403587d7c6791ca12f80"
       url: "https://pub.dev"
     source: hosted
     version: "4.12.0"
-  json_serializable:
-    dependency: "direct dev"
-    description:
-      name: json_serializable
-      sha256: ffcd10cde35a93b2abbbcc26bd9971f4ca93763e8abe78d855e3c4177797e501
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.14.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -363,14 +339,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
-  logger:
-    dependency: "direct main"
-    description:
-      name: logger
-      sha256: "25aee487596a6257655a1e091ec2ae66bc30e7af663592cc3a27e6591e05035c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.0"
   logging:
     dependency: transitive
     description:
@@ -399,10 +367,9 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: "1741988757a65eb6b36abe716829688cf01910bbf91c34354ff7ec1c3de2b349"
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "1.17.0"
   mime:
     dependency: transitive
@@ -420,9 +387,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-=======
-    version: "1.18.0"
->>>>>>> a97df81 (create files of project)
   path:
     dependency: transitive
     description:
@@ -439,14 +403,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.2"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      sha256: "75ec242d22e950bdcc79ee38dd520ce4ee0bc491d7fadc4ea47694604d22bf06"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
   pub_semver:
     dependency: transitive
     description:
@@ -471,22 +427,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
-  retrofit:
-    dependency: "direct main"
-    description:
-      name: retrofit
-      sha256: "0f629ed26b2c48c66fe54bd548313c6fdf7955be18bff37e08a46dd3f97f8eaf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.9.2"
-  retrofit_generator:
-    dependency: "direct dev"
-    description:
-      name: retrofit_generator
-      sha256: "0c6468f776e449de3886b0d68fa668943e005d884e618487fdf8b1323becdf88"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.2.7"
   shelf:
     dependency: transitive
     description:
@@ -516,14 +456,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.3"
-  source_helper:
-    dependency: transitive
-    description:
-      name: source_helper
-      sha256: "4227d54ceefd0bb8ca4c8fcb96e1719dc53f1ee1b6e2ca9d7a6069da160e4eae"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.12"
   source_span:
     dependency: transitive
     description:
@@ -576,10 +508,9 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "949a932224383300f01be9221c39180316445ecb8e7547f70a41a35bf421fb9e"
+      sha256: "8161c84903fd860b26bfdefb7963b3f0b68fee7adea0f59ef805ecca346f0c7a"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "0.7.10"
   typed_data:
     dependency: transitive
@@ -589,9 +520,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
-=======
-    version: "0.7.11"
->>>>>>> a97df81 (create files of project)
   vector_math:
     dependency: transitive
     description:
