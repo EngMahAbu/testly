@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
 
@@ -7,7 +5,7 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.backgroundColor,
+    scaffoldBackgroundColor: AppColors.white,
 
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
@@ -24,12 +22,12 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: TextStyle(decoration: TextDecoration.underline),
-        foregroundColor: AppColors.enableButtonColor,
+        foregroundColor: AppColors.blueBaseColor,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.enableButtonColor,
+        backgroundColor: AppColors.blueBaseColor,
         elevation: 0,
         disabledBackgroundColor: AppColors.disableButtonColor,
         foregroundColor: Colors.white,
@@ -83,11 +81,5 @@ class AppTheme {
       ),
     ),
 
-    // cardTheme: CardThemeData(
-    //   elevation: 2,
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(16),
-    //   ),
-    // ),
   );
 }
