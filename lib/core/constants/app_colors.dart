@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const Color white = Colors.white;
+  static const Color black = Colors.white;
   static const Color labelTextColor = Color(0xff535353);
   static const Color hintTextColor = Color(0xffA6A6A6);
   static const Color textFieldBorderColor = Color(0xff0F0F0F);
