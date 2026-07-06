@@ -15,9 +15,9 @@ class AppTheme {
         fontWeight: FontWeight.w500,
       ),
       elevation: 0,
-      backgroundColor: Colors.white,
-      // foregroundColor: AppColors.textFieldBorderColor,
-      iconTheme: IconThemeData(color: Colors.black, size: 24),
+      backgroundColor: AppColors.white,
+    
+      iconTheme: IconThemeData(color: AppColors.black, size: 24),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -30,16 +30,14 @@ class AppTheme {
         backgroundColor: AppColors.blueBaseColor,
         elevation: 0,
         disabledBackgroundColor: AppColors.disableButtonColor,
-        foregroundColor: Colors.white,
-
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        foregroundColor: AppColors.white,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       // error label style
       floatingLabelStyle: WidgetStateTextStyle.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return const TextStyle(color: Colors.red);
+          return const TextStyle(color:AppColors.notValidColor);
         }
         return const TextStyle(color: AppColors.labelTextColor);
       }),
@@ -61,19 +59,13 @@ class AppTheme {
       hintStyle: TextStyle(color: AppColors.hintTextColor),
       labelStyle: TextStyle(color: AppColors.labelTextColor),
       contentPadding: EdgeInsets.only(top: 16, bottom: 16, left: 16),
-
+  
       // border
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1),
       ),
-
-      // enabledBorder
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1),
-      ),
-
+   
       // foucsedBorder
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
