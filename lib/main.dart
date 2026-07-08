@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/ui/theme/app_theme.dart';
-import 'package:testly/features/auth/presentaion/login/view/login_view.dart';
+import 'features/auth/presentation/login/view/login_view.dart';
 
 void main() {
   configureDependencies();
