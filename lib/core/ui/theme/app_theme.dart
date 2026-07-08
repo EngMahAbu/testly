@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/constant.dart';
+import 'package:testly/core/constants/app_constant.dart';
+import 'package:testly/core/constants/app_styles.dart';
 
 class AppTheme {
   AppTheme._();
 
   static ThemeData lightTheme = ThemeData(
-    fontFamily: AppConstant.fontApp,
+    fontFamily: AppConstant.appFont,
     scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(
-        color: AppColors.blackShade,
-        fontSize: 20,
-        fontFamily: AppConstant.fontApp,
-        fontWeight: FontWeight.w500,
-      ),
       elevation: 0,
       backgroundColor: AppColors.white,
+      titleSpacing: 0,
+      titleTextStyle: AppStyles.screenTitle,
       iconTheme: IconThemeData(color: AppColors.black, size: 24),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -65,12 +62,11 @@ class AppTheme {
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.blackShade, width: 1.3),
       ),
-
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.blackShade, width: 1.3),
       ),
-      // foucsedBorder
+      // focusedBorder
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.blackShade, width: 1.6),
