@@ -22,6 +22,8 @@ import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i153;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
 import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
+import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
+    as _i1073;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -44,6 +46,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i571.SignupUseCase>(
       () => _i571.SignupUseCase(gh<_i787.AuthRepository>()),
+    );
+    gh.factory<_i1073.SignupViewModel>(
+      () => _i1073.SignupViewModel(gh<_i571.SignupUseCase>()),
     );
     return this;
   }

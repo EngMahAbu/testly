@@ -7,6 +7,8 @@ class MainTextField extends StatelessWidget {
   final String hint;
   final TextStyle labelStyle;
   final TextStyle hintStyle;
+  final TextEditingController? _controller;
+  final String? Function(String?)? validator;
 
   const MainTextField({
     super.key,
@@ -14,7 +16,9 @@ class MainTextField extends StatelessWidget {
     required this.hint,
     this.labelStyle = AppStyles.textFieldLabel,
     this.hintStyle = AppStyles.textFieldHint,
-  });
+    TextEditingController? controller,
+    this.validator,
+  }) : _controller = controller;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class MainTextField extends StatelessWidget {
         hintText: hint,
         hintStyle: hintStyle,
       ),
+      controller: _controller,
+      validator: validator,
     );
   }
 }
