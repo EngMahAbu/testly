@@ -14,6 +14,16 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../features/auth/api/client/auth_api_client.dart' as _i213;
+import '../../features/auth/api/data_sources/remote/auth_remote_data_source_impl.dart'
+    as _i411;
+import '../../features/auth/data/data_sources/remote/auth_remote_data_source.dart'
+    as _i432;
+import '../../features/auth/data/repositories/auth_repository_impl.dart'
+    as _i153;
+import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
+import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
+import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
+    as _i1073;
 import '../dio/dio_module.dart' as _i977;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -27,6 +37,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.singleton<_i213.AuthApiClient>(
       () => _i213.AuthApiClient(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i432.AuthRemoteDataSource>(
+      () => _i411.AuthRemoteDataSourceImpl(gh<_i213.AuthApiClient>()),
+    );
+    gh.singleton<_i787.AuthRepository>(
+      () => _i153.AuthRepositoryImpl(gh<_i432.AuthRemoteDataSource>()),
+    );
+    gh.singleton<_i571.SignupUseCase>(
+      () => _i571.SignupUseCase(gh<_i787.AuthRepository>()),
+    );
+    gh.factory<_i1073.SignupViewModel>(
+      () => _i1073.SignupViewModel(gh<_i571.SignupUseCase>()),
     );
     return this;
   }
