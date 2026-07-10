@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/config/di/di.config.dart';
+import 'package:testly/config/form_validator/form_validator.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
@@ -72,6 +73,9 @@ class _SignupViewState extends State<SignupView> {
                       label: AppStrings.usernameTextFieldLabel,
                       hint: AppStrings.usernameTextFieldHint,
                       controller: usernameController,
+                      validationPattern: FormValidator.usernamePattern,
+                      validationErrorMessage:
+                          AppStrings.usernameValidationError,
                     ),
                     const SizedBox(height: 24),
                     Row(
@@ -81,6 +85,9 @@ class _SignupViewState extends State<SignupView> {
                             label: AppStrings.firstNameTextFieldLabel,
                             hint: AppStrings.firstNameTextFieldHint,
                             controller: firstNameController,
+                            validationPattern: FormValidator.namePattern,
+                            validationErrorMessage:
+                                AppStrings.nameValidationError,
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -89,6 +96,9 @@ class _SignupViewState extends State<SignupView> {
                             label: AppStrings.lastNameTextFieldLabel,
                             hint: AppStrings.lastNameTextFieldHint,
                             controller: lastNameController,
+                            validationPattern: FormValidator.namePattern,
+                            validationErrorMessage:
+                                AppStrings.nameValidationError,
                           ),
                         ),
                       ],
@@ -98,6 +108,8 @@ class _SignupViewState extends State<SignupView> {
                       label: AppStrings.emailTextFieldLabel,
                       hint: AppStrings.emailTextFieldHint,
                       controller: emailController,
+                      validationPattern: FormValidator.emailPattern,
+                      validationErrorMessage: AppStrings.emailValidationError,
                     ),
                     const SizedBox(height: 24),
                     Row(
@@ -107,6 +119,35 @@ class _SignupViewState extends State<SignupView> {
                             label: AppStrings.passwordTextFieldLabel,
                             hint: AppStrings.passwordTextFieldHint,
                             controller: passwordController,
+                            validator: (input) {
+                              if (input == null) {
+                                return AppStrings.generalValidationError;
+                              }
+
+                              if (input.isEmpty) {
+                                return AppStrings.emptyValidationError;
+                              }
+
+                              switch (FormValidator.validatePassword(input)) {
+                                case Valid():
+                                  return null;
+                                case LengthError():
+                                  return AppStrings
+                                      .passwordLengthValidationError;
+                                case UppercaseError():
+                                  return AppStrings
+                                      .passwordUppercaseValidationError;
+                                case LowercaseError():
+                                  return AppStrings
+                                      .passwordLowercaseValidationError;
+                                case NumberError():
+                                  return AppStrings
+                                      .passwordNumberValidationError;
+                                case SpecialCharError():
+                                  return AppStrings
+                                      .passwordSpecialCharValidationError;
+                              }
+                            },
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -115,6 +156,22 @@ class _SignupViewState extends State<SignupView> {
                             label: AppStrings.confirmPasswordTextFieldLabel,
                             hint: AppStrings.confirmPasswordTextFieldHint,
                             controller: confirmPasswordController,
+                            validator: (input) {
+                              if (input == null) {
+                                return AppStrings.generalValidationError;
+                              }
+
+                              if (input.isEmpty) {
+                                return AppStrings.emptyValidationError;
+                              }
+
+                              if (passwordController.text !=
+                                  confirmPasswordController.text) {
+                                return AppStrings.confirmPasswordError;
+                              }
+
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -124,44 +181,17 @@ class _SignupViewState extends State<SignupView> {
                       label: AppStrings.phoneNumberTextFieldLabel,
                       hint: AppStrings.phoneNumberTextFieldHint,
                       controller: phoneController,
+                      validationPattern: FormValidator.phonePattern,
+                      validationErrorMessage: AppStrings.phoneValidationError,
                     ),
                     const SizedBox(height: 48),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
-                          _signupViewModel.signup(prepareSignupRequest());
-                          // {
-                          //     "username": "houda750",
-                          //     "firstName": "Mahmoud",
-                          //     "lastName": "Hijazy",
-                          //     "email": "houda750@route.com",
-                          //     "password": "Route@123",
-                          //     "rePassword": "Route@123",
-                          //     "phone": "01094155711"
-                          // }
-                          // final BaseResponse<UserEntity> response =
-                          //     await signupUseCase(
-                          //       SignupRequest(
-                          //         username: 'houda750',
-                          //         firstName: 'Mahmoud',
-                          //         lastName: 'Hijazy',
-                          //         email: 'houda750@route.com',
-                          //         password: 'Route@123',
-                          //         rePassword: 'Route@123',
-                          //         phone: '01094155711',
-                          //       ),
-                          //     );
-
-                          // switch (response) {
-                          //   case SuccessResponse<UserEntity>():
-                          //     print(
-                          //       '@@@ username: ${response.data?.username} created',
-                          //     );
-                          //   case ErrorResponse<UserEntity>():
-                          //     print('### Error:${response.error.toString()}');
-                          // }
-                          // formKey.currentState?.validate();
+                          if (formKey.currentState!.validate()) {
+                            _signupViewModel.signup(prepareSignupRequest());
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.blue,
@@ -221,4 +251,16 @@ class _SignupViewState extends State<SignupView> {
     rePassword: confirmPasswordController.text,
     phone: phoneController.text,
   );
+
+  @override
+  void dispose() {
+    super.dispose();
+    usernameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    phoneController.dispose();
+  }
 }
