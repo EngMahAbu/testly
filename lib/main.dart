@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<loginViewModel>(create: (_) => getIt<loginViewModel>()),
+        BlocProvider<LoginViewModel>(create: (_) => getIt<LoginViewModel>()),
         BlocProvider<SplashCubit>(create: (_) => getIt<SplashCubit>()),
       ],
       child: MaterialApp(

@@ -33,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<loginViewModel, LoginState>(
+    return BlocConsumer<LoginViewModel, LoginState>(
       listener: (context, state) {
         if (state.login!.data != null) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -145,7 +145,7 @@ class _LoginViewState extends State<LoginView> {
                             setState(() {
                               errorMessage = null;
                             });
-                            context.read<loginViewModel>().login(
+                            context.read<LoginViewModel>().login(
                               LoginRequest(
                                 email: emailController.text,
                                 password: passwordController.text,

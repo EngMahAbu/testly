@@ -23,12 +23,12 @@ class _RememberMeAndForgetPasswordState
       children: [
         Row(
           children: [
-            BlocBuilder<loginViewModel, LoginState>(
+            BlocBuilder<LoginViewModel, LoginState>(
               builder: (context, state) {
                 return Checkbox(
                   value: state.rememberMe,
                   onChanged: (value) {
-                    context.read<loginViewModel>().changeRememberMe(value!);
+                    context.read<LoginViewModel>().changeRememberMe(value!);
                   },
                 );
               },

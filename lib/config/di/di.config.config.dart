@@ -77,8 +77,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i670.SplashCubit>(
       () => _i670.SplashCubit(gh<_i78.GetTokenUseCase>()),
     );
-    gh.factory<_i864.loginViewModel>(
-      () => _i864.loginViewModel(
+    gh.factory<_i864.LoginViewModel>(
+      () => _i864.LoginViewModel(
         gh<_i1012.LoginUseCase>(),
         gh<_i78.SaveTokenUseCase>(),
         gh<_i78.DeleteTokenUseCase>(),
