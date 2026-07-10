@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/constant.dart';
+import 'package:testly/core/constants/app_constant.dart';
+import 'package:testly/core/constants/app_styles.dart';
 
 class AppTheme {
   AppTheme._();
 
   static ThemeData lightTheme = ThemeData(
-
-       fontFamily:AppConstant.fontApp,
-
+    fontFamily: AppConstant.appFont,
     scaffoldBackgroundColor: AppColors.white,
- 
     appBarTheme: AppBarTheme(
-
-      titleTextStyle: TextStyle(
-        color: AppColors.blackShade,
-        fontSize: 20,
-        fontFamily: AppConstant.fontApp,
-        fontWeight: FontWeight.w500,
-      ),
-      elevation: 0,
       backgroundColor: AppColors.white,
-    
+      titleSpacing: 0,
+      elevation: 0,
+      titleTextStyle: AppStyles.screenTitle,
       iconTheme: IconThemeData(color: AppColors.black, size: 24),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -42,7 +34,7 @@ class AppTheme {
       // error label style
       floatingLabelStyle: WidgetStateTextStyle.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return const TextStyle(color:AppColors.lightRed);
+          return const TextStyle(color: AppColors.lightRed);
         }
         return const TextStyle(color: AppColors.darkGrey);
       }),
@@ -64,22 +56,21 @@ class AppTheme {
       hintStyle: TextStyle(color: AppColors.grey),
       labelStyle: TextStyle(color: AppColors.darkGrey),
       contentPadding: EdgeInsets.only(top: 16, bottom: 16, left: 16),
-  
+
       // border
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.blackShade, width: 1.3),
       ),
-     enabledBorder:  OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: BorderSide(color: AppColors.blackShade, width: 1.3),
       ),
-      // foucsedBorder
+      // focusedBorder
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
-        borderSide: BorderSide(color: AppColors.blackShade, width: 1.6,),
+        borderSide: BorderSide(color: AppColors.blackShade, width: 1.6),
       ),
     ),
-
   );
 }
