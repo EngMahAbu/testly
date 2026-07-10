@@ -60,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
       },
 
       builder: (context, state) {
-    bool isLoading=    state.login!.isLoading;
+        bool isLoading = state.login!.isLoading;
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -153,16 +153,22 @@ class _LoginViewState extends State<LoginView> {
                             );
                           }
                         },
-                        child:isLoading?CircularProgressIndicator(
-                          backgroundColor: AppColors.white,
-                        ): const Text(
-                          AppStrings.loginButton,
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        child: isLoading
+                            ? CircularProgressIndicator(
+                                backgroundColor: AppColors.white,
+                              )
+                            : const Text(
+                                AppStrings.loginButton,
+                                style: TextStyle(fontSize: 16),
+                              ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     const DontHaveAccount(),
+
+                    SizedBox(height: 33),
+
+                 
                   ],
                 ),
               ),

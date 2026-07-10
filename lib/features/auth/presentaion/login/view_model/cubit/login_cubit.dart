@@ -4,33 +4,51 @@ import 'package:testly/config/base_response/base_response.dart';
  
 import 'package:testly/config/base_state/base_state.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
+import 'package:testly/features/auth/domain/entities/login_entity.dart';
 import 'package:testly/features/auth/domain/entities/user_entity.dart';
 import 'package:testly/features/auth/domain/use_cases/login_usecase.dart';
+import 'package:testly/features/auth/domain/use_cases/token_usecases/token_usecases.dart';
 import 'package:testly/features/auth/presentaion/login/view_model/cubit/login_state.dart';
 
 
 @injectable
 class loginViewModel extends Cubit<LoginState> {
-  final LoginUseCase _loginUseCase;
+final LoginUseCase _loginUseCase;
+final SaveTokenUseCase _saveTokenUseCase;
+final DeleteTokenUseCase _deleteTokenUseCase;
 
-  loginViewModel(this._loginUseCase) : super(LoginState()) {
-    state.login = BaseState<UserEntity>();
-  }
+loginViewModel(
+  this._loginUseCase,
+  this._saveTokenUseCase,
+  this._deleteTokenUseCase,
+) : super(LoginState()) {
+  state.login = BaseState<UserEntity>();
+}
+  
 
-  void login(LoginRequest loginRequest) async {
+  Future<void> login(LoginRequest loginRequest) async {
     emit(state.copyWith(login: BaseState<UserEntity>(isLoading: true)));
+
     final loginResponse = await _loginUseCase(loginRequest);
+
     switch (loginResponse) {
-      case SuccessResponse<UserEntity>():
+      case SuccessResponse<LoginEntity>():
+        if (state.rememberMe && loginResponse.data != null) {
+          await _saveTokenUseCase(loginResponse.data!.token);
+        } else {
+          await _deleteTokenUseCase();
+        }
+
         emit(
           state.copyWith(
             login: BaseState<UserEntity>(
               isLoading: false,
-              data: loginResponse.data,
+              data: loginResponse.data?.user,
             ),
           ),
         );
-      case ErrorResponse<UserEntity>():
+
+      case ErrorResponse<LoginEntity>():
         emit(
           state.copyWith(
             login: BaseState<UserEntity>(
@@ -41,6 +59,12 @@ class loginViewModel extends Cubit<LoginState> {
         );
     }
   }
-
+void changeRememberMe(bool value) {
+  emit(
+    state.copyWith(
+      rememberMe: value,
+    ),
+  );
+}
  
 }

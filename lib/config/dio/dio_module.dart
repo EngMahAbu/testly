@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:testly/config/storage_module/storage.dart';
 import 'package:testly/core/constants/endpoints.dart';
 
 @module
@@ -10,8 +11,11 @@ abstract class DioModule {
           baseUrl: Endpoints.baseUrl,
           connectTimeout: const Duration(seconds: 15),
           receiveTimeout: const Duration(seconds: 15),
-          ),
+        ),
       );
+
+  @singleton
+  SecureStorageService get secureStorageService => SecureStorageService();
 }
 
  
