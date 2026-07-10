@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/config/base_response/base_response.dart';
-import 'package:testly/config/base_state/base_state.dart';
 import 'package:testly/config/form_validator/form_validator.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
@@ -62,7 +60,7 @@ class _LoginViewState extends State<LoginView> {
       },
 
       builder: (context, state) {
-    bool isLoading=    state.login!.isLoading;
+        bool isLoading = state.login!.isLoading;
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -155,16 +153,22 @@ class _LoginViewState extends State<LoginView> {
                             );
                           }
                         },
-                        child:isLoading?CircularProgressIndicator(
-                          backgroundColor: AppColors.white,
-                        ): const Text(
-                          AppStrings.loginButton,
-                          style: TextStyle(fontSize: 16),
-                        ),
+                        child: isLoading
+                            ? CircularProgressIndicator(
+                                backgroundColor: AppColors.white,
+                              )
+                            : const Text(
+                                AppStrings.loginButton,
+                                style: TextStyle(fontSize: 16),
+                              ),
                       ),
                     ),
                     const SizedBox(height: 16),
                     const DontHaveAccount(),
+
+                    SizedBox(height: 33),
+
+                 
                   ],
                 ),
               ),
