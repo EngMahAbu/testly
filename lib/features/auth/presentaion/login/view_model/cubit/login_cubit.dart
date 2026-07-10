@@ -12,12 +12,12 @@ import 'package:testly/features/auth/presentaion/login/view_model/cubit/login_st
 
 
 @injectable
-class loginViewModel extends Cubit<LoginState> {
+class LoginViewModel extends Cubit<LoginState> {
 final LoginUseCase _loginUseCase;
 final SaveTokenUseCase _saveTokenUseCase;
 final DeleteTokenUseCase _deleteTokenUseCase;
 
-loginViewModel(
+LoginViewModel(
   this._loginUseCase,
   this._saveTokenUseCase,
   this._deleteTokenUseCase,
