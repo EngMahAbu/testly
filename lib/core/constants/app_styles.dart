@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:testly/core/constants/app_colors.dart';
+import 'package:testly/core/constants/constant.dart';
+
+abstract final class AppStyles {
+  static const TextStyle screenTitle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+    fontFamily: AppConstant.appFont,
+    color: AppColors.black,
+  );
+
+  static const TextStyle textFieldLabel = TextStyle(
+    fontWeight: FontWeight.w400,
+    color: AppColors.darkGrey,
+    fontFamily: AppConstant.appFont,
+    fontSize: 14,
+  );
+
+  static const TextStyle textFieldHint = TextStyle(
+    fontWeight: FontWeight.w400,
+    color: AppColors.grey,
+    fontFamily: AppConstant.appFont,
+    fontSize: 14,
+  );
+
+  static const TextStyle elevatedButton = TextStyle(
+    color: AppColors.white,
+    fontWeight: FontWeight.w500,
+    fontFamily: AppConstant.appFont,
+    fontSize: 16,
+  );
+
+  static const TextStyle defaultText = TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w400,
+    fontFamily: AppConstant.appFont,
+    fontSize: 16,
+  );
+
+  static const TextStyle linkStyledTextButton = TextStyle(
+    color: AppColors.blue,
+    fontWeight: FontWeight.w500,
+    fontFamily: AppConstant.appFont,
+    fontSize: 16,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.blue,
+  );
+}
