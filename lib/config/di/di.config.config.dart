@@ -26,10 +26,13 @@ import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i153;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
 import '../../features/auth/domain/use_cases/login_usecase.dart' as _i1012;
+import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
 import '../../features/auth/domain/use_cases/token_usecases/token_usecases.dart'
     as _i78;
 import '../../features/auth/presentaion/login/view_model/cubit/login_cubit.dart'
     as _i864;
+import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
+    as _i1073;
 import '../../features/splash/presentation/view_models/splash_cubit.dart'
     as _i670;
 import '../dio/dio_module.dart' as _i977;
@@ -53,7 +56,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i485.AuthLocalDataSource>(
       () => _i277.AuthLocalDataSourceImpl(gh<_i741.SecureStorageService>()),
     );
-    gh.factory<_i432.AuthRemoteDataSource>(
+    gh.singleton<_i432.AuthRemoteDataSource>(
       () => _i411.AuthRemoteDataSourceImpl(gh<_i213.AuthApiClient>()),
     );
     gh.factory<_i787.AuthRepository>(
@@ -65,6 +68,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1012.LoginUseCase>(
       () => _i1012.LoginUseCase(gh<_i787.AuthRepository>()),
     );
+    gh.singleton<_i571.SignupUseCase>(
+      () => _i571.SignupUseCase(gh<_i787.AuthRepository>()),
+    );
     gh.factory<_i78.SaveTokenUseCase>(
       () => _i78.SaveTokenUseCase(gh<_i787.AuthRepository>()),
     );
@@ -73,6 +79,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i78.DeleteTokenUseCase>(
       () => _i78.DeleteTokenUseCase(gh<_i787.AuthRepository>()),
+    );
+    gh.factory<_i1073.SignupViewModel>(
+      () => _i1073.SignupViewModel(gh<_i571.SignupUseCase>()),
     );
     gh.factory<_i670.SplashCubit>(
       () => _i670.SplashCubit(gh<_i78.GetTokenUseCase>()),

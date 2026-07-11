@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/config/di/di.config.dart';
 import 'package:testly/features/auth/domain/use_cases/token_usecases/token_usecases.dart';
-import 'package:testly/features/auth/presentaion/login/view/login_view.dart';
+import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({super.key, required this.email});
