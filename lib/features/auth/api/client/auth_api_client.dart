@@ -5,6 +5,8 @@ import 'package:retrofit/http.dart';
 import 'package:testly/core/constants/endpoints.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/data/models/login_response.dart';
+import 'package:testly/features/auth/data/models/signup_request.dart';
+import 'package:testly/features/auth/data/models/signup_response.dart';
 
 part 'auth_api_client.g.dart';
 
@@ -17,6 +19,10 @@ abstract class AuthApiClient {
   @POST(Endpoints.signIn)
   Future<LoginResponse> login(@Body() LoginRequest request);
    
-}
+
 
  
+
+  @POST(Endpoints.signup)
+  Future<SignupResponse> signup(@Body() SignupRequest signupRequest);
+}

@@ -1,12 +1,15 @@
 import 'package:injectable/injectable.dart';
 import 'package:testly/config/base_response/base_response.dart';
+ 
 import 'package:testly/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:testly/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/data/models/login_response.dart';
 import 'package:testly/features/auth/domain/entities/login_entity.dart';
 import 'package:testly/features/auth/domain/repositories/auth_repository.dart';
-
+import 'package:testly/features/auth/data/models/signup_request.dart';
+import 'package:testly/features/auth/data/models/signup_response.dart';
+import 'package:testly/features/auth/domain/entities/user_entity.dart';
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
 
@@ -14,7 +17,16 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthLocalDataSource _authLocalDataSource;
 
   AuthRepositoryImpl(this._authRemoteDataSource, this._authLocalDataSource);
-
+  @override
+  Future<BaseResponse<UserEntity>> signup(SignupRequest signupRequest) async {
+    final response = await _authRemoteDataSource.signup(signupRequest);
+    switch (response) {
+      case SuccessResponse<SignupResponse>():
+        return SuccessResponse<UserEntity>(response.data!.user!.toEntity());
+      case ErrorResponse<SignupResponse>():
+        return ErrorResponse<UserEntity>(response.errorMessage);
+    }
+  }
   @override
 Future<BaseResponse<LoginEntity>> login(
     LoginRequest request) async {
@@ -53,3 +65,4 @@ Future<void> deleteToken() {
   return _authLocalDataSource.deleteToken();
 }
 }
+
