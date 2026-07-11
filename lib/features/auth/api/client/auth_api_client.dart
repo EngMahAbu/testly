@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:testly/core/constants/endpoints.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_request.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
 
@@ -16,4 +18,7 @@ abstract class AuthApiClient {
 
   @POST(Endpoints.signup)
   Future<SignupResponse> signup(@Body() SignupRequest signupRequest);
+
+  @POST(Endpoints.forgetPassword)
+  Future<PasswordResetEmailResponse> sendPasswordResetEmail(@Body() PasswordResetEmailRequest passwordResetEmailRequest);
 }

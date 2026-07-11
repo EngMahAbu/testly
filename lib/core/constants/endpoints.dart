@@ -1,4 +1,5 @@
 abstract final class Endpoints {
   static const baseUrl = 'https://exam.elevateegy.com/api/v1/';
   static const signup = 'auth/signup';
+  static const forgetPassword = 'auth/forgotPassword';
 }

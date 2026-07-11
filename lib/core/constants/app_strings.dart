@@ -18,6 +18,10 @@ abstract final class AppStrings {
   static const signupButton = 'Signup';
   static const alreadyHaveAccount = 'Already have an account?';
   static const loginButton = 'Login';
+  static const forgetPasswordScreenTitle = 'Password';
+  static const forgetPasswordScreenSubTitle = 'Forget password';
+  static const forgetPasswordScreenNote =
+      'Please enter your email associated to your account';
 
   // API Response Messages
   static const generalErrorMessage =

@@ -1,39 +1,43 @@
 import 'package:dio/dio.dart';
 import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/core/constants/app_strings.dart';
-import 'package:testly/features/auth/data/models/signup_response.dart';
 
 abstract final class ApiErrorHandler {
-  static ErrorResponse<SignupResponse> handleException(Exception exception) {
+  static ErrorResponse<T> handleException<T>(Exception exception) {
     if (exception is! DioException) {
-      return ErrorResponse(AppStrings.generalErrorMessage);
+      return ErrorResponse<T>(AppStrings.generalErrorMessage);
     }
 
+    String errorMessage = '';
     switch (exception.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
-        return ErrorResponse(AppStrings.connectionErrorMessage);
+        errorMessage = AppStrings.connectionErrorMessage;
 
       case DioExceptionType.connectionError:
-        return ErrorResponse(AppStrings.noConnectionErrorMessage);
+        errorMessage = AppStrings.noConnectionErrorMessage;
 
       case DioExceptionType.badCertificate:
-        return ErrorResponse(AppStrings.securityErrorMessage);
+        errorMessage = AppStrings.securityErrorMessage;
+
       case DioExceptionType.cancel:
-        return ErrorResponse(AppStrings.cancelErrorMessage);
+        errorMessage = AppStrings.cancelErrorMessage;
+
       case DioExceptionType.badResponse:
       case DioExceptionType.unknown:
         if (exception.response != null) {
-          return _handleStatusCode(exception.response!);
+          return _handleStatusCode<T>(exception.response!);
         }
-        return ErrorResponse(AppStrings.generalErrorMessage);
+        errorMessage = AppStrings.generalErrorMessage;
       default:
-        return ErrorResponse(AppStrings.generalErrorMessage);
+        errorMessage = AppStrings.generalErrorMessage;
     }
+
+    return ErrorResponse<T>(errorMessage);
   }
 
-  static ErrorResponse<SignupResponse> _handleStatusCode(Response response) {
+  static ErrorResponse<T> _handleStatusCode<T>(Response response) {
     final statusCode = response.statusCode;
     final data = response.data;
 
@@ -92,6 +96,6 @@ abstract final class ApiErrorHandler {
             : AppStrings.generalErrorMessage;
     }
 
-    return ErrorResponse(serverMessage);
+    return ErrorResponse<T>(serverMessage);
   }
 }
