@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/config/form_validator/form_validator.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
-import 'package:testly/core/ui/widgets/custom_appbar.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/presentaion/login/view_model/cubit/login_cubit.dart';
 import 'package:testly/features/auth/presentaion/login/view_model/cubit/login_state.dart';
@@ -62,6 +61,13 @@ class _LoginViewState extends State<LoginView> {
       builder: (context, state) {
         bool isLoading = state.login!.isLoading;
         return Scaffold(
+      appBar:     AppBar(
+            leading: const Padding(
+              padding: EdgeInsetsDirectional.only(start: 16.0),
+              child: Icon(Icons.arrow_back_ios, color: AppColors.black),
+            ),
+            title: Text( AppStrings.loginScreenTitle),
+          ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -69,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                 key: formKey,
                 child: Column(
                   children: [
-                    const CustomAppbar(title: AppStrings.loginScreenTitle),
+                     
                     const SizedBox(height: 24),
                     TextFormField(
                       validator: (value) {
