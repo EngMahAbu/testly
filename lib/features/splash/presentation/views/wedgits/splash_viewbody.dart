@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/features/auth/presentaion/login/widgets/second_screen.dart';
+import 'package:testly/features/auth/presentation/login/widgets/second_screen.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_state.dart';

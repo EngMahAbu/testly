@@ -29,7 +29,7 @@ import '../../features/auth/domain/use_cases/login_usecase.dart' as _i1012;
 import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
 import '../../features/auth/domain/use_cases/token_usecases/token_usecases.dart'
     as _i78;
-import '../../features/auth/presentaion/login/view_model/cubit/login_cubit.dart'
+import '../../features/auth/presentation/login/view_model/cubit/login_cubit.dart'
     as _i864;
 import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
     as _i1073;
