@@ -30,12 +30,25 @@ import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
 import '../../features/auth/domain/use_cases/token_usecases/token_usecases.dart'
     as _i78;
 import '../../features/auth/presentation/login/view_model/cubit/login_cubit.dart'
-    as _i864;
+    as _i397;
 import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
     as _i1073;
+import '../../features/exam/api/client/exam_api_client.dart' as _i666;
+import '../../features/exam/api/data_sources/remote/exam_remote_data_source_impl.dart'
+    as _i157;
+import '../../features/exam/data/data_sources/remote/exam_remote_data_source.dart'
+    as _i4;
+import '../../features/exam/data/repositories/exam_repository_impl.dart'
+    as _i362;
+import '../../features/exam/domain/repositories/exam_repository.dart' as _i413;
+import '../../features/exam/domain/usecases/get_subjects_use_case.dart'
+    as _i816;
+import '../../features/exam/presentation/view_model/cubit/exam_cubit.dart'
+    as _i415;
 import '../../features/splash/presentation/view_models/splash_cubit.dart'
     as _i670;
 import '../dio/dio_module.dart' as _i977;
+import '../dio/token_service.dart' as _i947;
 import '../storage_module/storage.dart' as _i741;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -46,24 +59,41 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
-    gh.singleton<_i361.Dio>(() => dioModule.dio);
     gh.singleton<_i741.SecureStorageService>(
       () => dioModule.secureStorageService,
-    );
-    gh.singleton<_i213.AuthApiClient>(
-      () => _i213.AuthApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i485.AuthLocalDataSource>(
       () => _i277.AuthLocalDataSourceImpl(gh<_i741.SecureStorageService>()),
     );
+    gh.singleton<_i947.TokenService>(
+      () => dioModule.tokenService(gh<_i741.SecureStorageService>()),
+    );
+    gh.singleton<_i361.Dio>(
+      () => dioModule.dio(
+        gh<_i741.SecureStorageService>(),
+        gh<_i947.TokenService>(),
+      ),
+    );
+    gh.singleton<_i213.AuthApiClient>(
+      () => _i213.AuthApiClient(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i666.ExamApiClient>(
+      () => _i666.ExamApiClient(gh<_i361.Dio>()),
+    );
     gh.singleton<_i432.AuthRemoteDataSource>(
       () => _i411.AuthRemoteDataSourceImpl(gh<_i213.AuthApiClient>()),
+    );
+    gh.factory<_i4.ExamRemoteDataSource>(
+      () => _i157.ExamRemoteDataSourceImpl(gh<_i666.ExamApiClient>()),
     );
     gh.factory<_i787.AuthRepository>(
       () => _i153.AuthRepositoryImpl(
         gh<_i432.AuthRemoteDataSource>(),
         gh<_i485.AuthLocalDataSource>(),
       ),
+    );
+    gh.factory<_i413.ExamRepository>(
+      () => _i362.ExamRepositoryImpl(gh<_i4.ExamRemoteDataSource>()),
     );
     gh.factory<_i1012.LoginUseCase>(
       () => _i1012.LoginUseCase(gh<_i787.AuthRepository>()),
@@ -80,18 +110,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i78.DeleteTokenUseCase>(
       () => _i78.DeleteTokenUseCase(gh<_i787.AuthRepository>()),
     );
+    gh.factory<_i397.LoginViewModel>(
+      () => _i397.LoginViewModel(
+        gh<_i1012.LoginUseCase>(),
+        gh<_i78.SaveTokenUseCase>(),
+        gh<_i947.TokenService>(),
+      ),
+    );
+    gh.singleton<_i816.GetSubjectsUseCase>(
+      () => _i816.GetSubjectsUseCase(gh<_i413.ExamRepository>()),
+    );
     gh.factory<_i1073.SignupViewModel>(
       () => _i1073.SignupViewModel(gh<_i571.SignupUseCase>()),
     );
+    gh.factory<_i415.ExamCubit>(
+      () => _i415.ExamCubit(gh<_i816.GetSubjectsUseCase>()),
+    );
     gh.factory<_i670.SplashCubit>(
       () => _i670.SplashCubit(gh<_i78.GetTokenUseCase>()),
-    );
-    gh.factory<_i864.LoginViewModel>(
-      () => _i864.LoginViewModel(
-        gh<_i1012.LoginUseCase>(),
-        gh<_i78.SaveTokenUseCase>(),
-        gh<_i78.DeleteTokenUseCase>(),
-      ),
     );
     return this;
   }
