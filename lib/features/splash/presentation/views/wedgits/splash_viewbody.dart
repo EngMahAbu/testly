@@ -37,7 +37,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
         if (state is SplashAuthenticated) {
-            Navigator.pushReplacement(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => ExamView()),
           );
@@ -89,6 +89,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void navigatebetweenpages() {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => LoginView()),
       );

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/features/exam/data/data_sources/remote/exam_remote_data_source.dart';

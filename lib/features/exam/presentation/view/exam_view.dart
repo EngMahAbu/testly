@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/app_constant.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/auth/domain/use_cases/token_usecases/token_usecases.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/exam/presentation/view_model/cubit/exam_cubit.dart';
 import 'package:testly/features/exam/presentation/widgets/exam_text_field.dart';
-import 'package:testly/features/exam/presentation/widgets/subject_card.dart';
 import 'package:testly/features/exam/presentation/widgets/subjects_listview.dart';
 
 class ExamView extends StatelessWidget {

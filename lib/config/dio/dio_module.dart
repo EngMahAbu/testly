@@ -12,14 +12,14 @@ abstract class DioModule {
 
   @singleton
   Dio dio(SecureStorageService secureStorageService, TokenService tokenService) {
-    final _dio = Dio(
+    final dio = Dio(
       BaseOptions(
         baseUrl: Endpoints.baseUrl,
         
       ),
     );
 
-    _dio.interceptors.add(InterceptorsWrapper(
+    dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
         try {
           final token = await tokenService.getToken();
@@ -31,7 +31,7 @@ abstract class DioModule {
       },
     ));
 
-    return _dio;
+    return dio;
   }
 
   @singleton

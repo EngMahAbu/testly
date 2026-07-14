@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/app_constant.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/exam/presentation/view_model/cubit/exam_cubit.dart';
 import 'package:testly/features/exam/presentation/view_model/cubit/exam_state.dart';
@@ -38,10 +34,7 @@ class SubjectsListview extends StatelessWidget {
         }
 
         return SliverPadding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 24
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 24),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate((
               BuildContext context,
