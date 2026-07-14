@@ -3,7 +3,7 @@ abstract final class AppStrings {
   static const signupScreenTitle = 'Sign Up';
   static const loginScreenTitle = 'Log In';
   static const usernameTextFieldLabel = 'User name';
-  static const usernameTextFieldHint = 'Enter your user name'; 
+  static const usernameTextFieldHint = 'Enter your user name';
   static const firstNameTextFieldLabel = 'First name';
   static const firstNameTextFieldHint = 'Enter first name';
   static const lastNameTextFieldLabel = 'Last name';
@@ -11,7 +11,7 @@ abstract final class AppStrings {
   static const emailTextFieldLabel = 'Email';
   static const emailTextFieldHint = 'Enter your email';
   static const passwordTextFieldLabel = 'Password';
-  static const passwordTextFieldHint = 'Enter password'; 
+  static const passwordTextFieldHint = 'Enter password';
   static const confirmPasswordTextFieldLabel = 'Confirm password';
   static const confirmPasswordTextFieldHint = 'Confirm password';
   static const phoneNumberTextFieldLabel = 'Phone number';
@@ -71,4 +71,9 @@ abstract final class AppStrings {
   static const String phoneValidationError =
       'Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015 followed by 8 digits.';
   static const String confirmPasswordError = 'Passwords do not match';
+
+  // Exam Feature
+  static const examScreenTitle = 'Survey';
+  static const String browseBySubject = 'Browse by subject';
+  static const String notFoundSubjects = 'There is no subjects found';
 }

@@ -8,6 +8,7 @@ import 'package:testly/features/auth/domain/entities/login_entity.dart';
 import 'package:testly/features/auth/domain/entities/user_entity.dart';
 import 'package:testly/features/auth/domain/use_cases/login_usecase.dart';
 import 'package:testly/features/auth/domain/use_cases/token_usecases/token_usecases.dart';
+import 'package:testly/config/dio/token_service.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 
 
@@ -15,12 +16,12 @@ import 'package:testly/features/auth/presentation/login/view_model/cubit/login_s
 class LoginViewModel extends Cubit<LoginState> {
 final LoginUseCase _loginUseCase;
 final SaveTokenUseCase _saveTokenUseCase;
-final DeleteTokenUseCase _deleteTokenUseCase;
+final TokenService _tokenService;
 
 LoginViewModel(
   this._loginUseCase,
   this._saveTokenUseCase,
-  this._deleteTokenUseCase,
+  this._tokenService,
 ) : super(LoginState()) {
   state.login = BaseState<UserEntity>();
 }
@@ -33,10 +34,15 @@ LoginViewModel(
 
     switch (loginResponse) {
       case SuccessResponse<LoginEntity>():
-        if (state.rememberMe && loginResponse.data != null) {
-          await _saveTokenUseCase(loginResponse.data!.token);
-        } else {
-          await _deleteTokenUseCase();
+        if (loginResponse.data != null) {
+          // keep token in memory for current session; persist only if rememberMe
+          _tokenService.setToken(
+            loginResponse.data!.token,
+            persist: state.rememberMe,
+          );
+          if (state.rememberMe) {
+            await _saveTokenUseCase(loginResponse.data!.token);
+          }
         }
 
         emit(

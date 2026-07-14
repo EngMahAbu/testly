@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SplashCubit>(
-      create: (_) => getIt<SplashCubit>(),
+           create: (_) => getIt.get<SplashCubit>(),
 
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

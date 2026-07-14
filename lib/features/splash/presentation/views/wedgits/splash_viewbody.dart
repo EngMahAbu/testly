@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/features/auth/presentation/login/widgets/second_screen.dart';
+import 'package:testly/core/constants/app_constant.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
+import 'package:testly/features/exam/presentation/view/exam_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_state.dart';
 
@@ -38,7 +39,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         if (state is SplashAuthenticated) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SecondScreen(email: "",)),
+            MaterialPageRoute(builder: (context) => ExamView()),
           );
         }
 
@@ -59,7 +60,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             builder: (context, _) {
               return SlideTransition(
                 position: slidelogo,
-                child: Image.asset("assets/images/testly.png", width: 130),
+                child: Image.asset(AppConstant.testlyImage, width: 130),
               );
             },
           ),
