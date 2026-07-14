@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/core/constants/app_constant.dart';
+import 'package:testly/core/constants/app_constants.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/exam/presentation/view/subjects_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
