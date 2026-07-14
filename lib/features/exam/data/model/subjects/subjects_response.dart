@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:testly/features/exam/data/model/metadata_response.dart';
-import 'package:testly/features/exam/data/model/subject_model.dart';
+import 'package:testly/features/exam/data/model/subjects/metadata_response.dart';
+import 'package:testly/features/exam/data/model/subjects/subject_model.dart';
 
 part 'subjects_response.g.dart';
 
