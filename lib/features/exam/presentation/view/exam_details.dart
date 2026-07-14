@@ -4,6 +4,8 @@ import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_cubit.dart';
+import 'package:testly/features/exam/presentation/widgets/exam_details_card.dart';
+import 'package:testly/features/exam/presentation/widgets/exams_of_exam_list_view.dart';
 
 class ExamDetails extends StatelessWidget {
   const ExamDetails({super.key, required this.id, required this.title});
@@ -15,9 +17,9 @@ class ExamDetails extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 15,
         title: Text(
-          AppStrings.examScreenTitle,
+          title,
           style: TextStyle(
-            color: AppColors.blue,
+            color: AppColors.black,
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
@@ -27,14 +29,23 @@ class ExamDetails extends StatelessWidget {
       body: BlocProvider<ExamCubit>(
         create: (context) => getIt.get<ExamCubit>()..getExams(id),
         child: SafeArea(
-          child: Column(
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
-              Text(id),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Exams of $title",
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 24),
+              ExamsOfExamListView()
+              ],
+            ),
           ),
         ),
       ),

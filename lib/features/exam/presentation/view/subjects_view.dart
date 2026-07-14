@@ -9,8 +9,8 @@ import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exa
 import 'package:testly/features/exam/presentation/widgets/exam_text_field.dart';
 import 'package:testly/features/exam/presentation/widgets/subjects_listview.dart';
 
-class ExamView extends StatelessWidget {
-  const ExamView({super.key});
+class SubjectsView extends StatelessWidget {
+  const SubjectsView({super.key});
 
   @override
   Widget build(BuildContext context) {

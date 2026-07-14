@@ -9,7 +9,7 @@ import 'package:testly/features/auth/presentation/login/view_model/cubit/login_c
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 import 'package:testly/features/auth/presentation/login/widgets/dont_have_account.dart';
 import 'package:testly/features/auth/presentation/login/widgets/remember_me_and_forget_password.dart';
-import 'package:testly/features/exam/presentation/view/exam_view.dart';
+import 'package:testly/features/exam/presentation/view/subjects_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
             );
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ExamView()),
+              MaterialPageRoute(builder: (context) => SubjectsView()),
             );
           } else if (state.login!.errorMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(

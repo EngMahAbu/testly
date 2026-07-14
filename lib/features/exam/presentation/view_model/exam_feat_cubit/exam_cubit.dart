@@ -45,7 +45,7 @@ class ExamCubit extends Cubit<ExamState> {
  Future<void> getExams(String subjectId) async {
     emit(
       state.copyWith(
-        exams: state.exams!.copyWith(
+        exams: state.exams?.copyWith(
           isLoading: true,
          
         ),

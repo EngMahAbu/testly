@@ -76,5 +76,6 @@ abstract final class AppStrings {
   static const examScreenTitle = 'Survey';
   static const searchHint = 'Search';
   static const String browseBySubject = 'Browse by subject';
-  static const String notFoundSubjects = 'There is no subjects found';
+  static const String notFoundSubjects = "No subjects available";
+  static const String notFoundExams = 'No exams available';
 }

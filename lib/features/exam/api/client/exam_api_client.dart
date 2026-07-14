@@ -15,7 +15,7 @@ abstract class ExamApiClient {
 
   @GET('/subjects')
   Future<SubjectsResponse> getSubjects();
-    @GET('/exams')
+    @GET('/exams?')
   Future<ExamsResponse> getExams(
     @Query('subject') String subjectId,
   );
