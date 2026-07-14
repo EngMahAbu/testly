@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/app_constant.dart';
+import 'package:testly/core/constants/app_constants.dart';
 import 'package:testly/core/constants/app_styles.dart';
 
 class AppTheme {

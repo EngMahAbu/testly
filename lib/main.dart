@@ -15,13 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SplashCubit>(
-      create: (_) => getIt.get<SplashCubit>(),
-
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        home: SplashView(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      home: BlocProvider<SplashCubit>(
+          create: (_) => getIt<SplashCubit>(),
+        child: SplashView(),
       ),
     );
   }
