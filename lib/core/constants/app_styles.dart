@@ -47,9 +47,9 @@ abstract final class AppStyles {
     decorationColor: AppColors.blue,
   );
 
-  static const TextStyle medium18Text = TextStyle(
+  static const TextStyle bold18Text = TextStyle(
     color: AppColors.black,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
     fontFamily: AppConstant.appFont,
     fontSize: 18,
   );

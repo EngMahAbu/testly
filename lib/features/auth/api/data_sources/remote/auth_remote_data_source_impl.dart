@@ -7,6 +7,8 @@ import 'package:testly/features/auth/data/models/password_reset_email_request.da
 import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_response.dart';
 
 @Singleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -38,6 +40,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
     } on Exception catch (e) {
       return ApiErrorHandler.handleException<PasswordResetEmailResponse>(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<VerifyResetCodeResponse>> verifyResetCode(
+    VerifyResetCodeRequest verifyResetCodeRequest,
+  ) async {
+    try {
+      final verifyResetCodeResponse = await _authApiClient.verifyResetCode(
+        verifyResetCodeRequest,
+      );
+      return SuccessResponse<VerifyResetCodeResponse>(verifyResetCodeResponse);
+    } on Exception catch (e) {
+      return ApiErrorHandler.handleException<VerifyResetCodeResponse>(e);
     }
   }
 }

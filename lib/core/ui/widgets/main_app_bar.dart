@@ -35,6 +35,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: Icon(Icons.arrow_back_ios, color: AppColors.black),
               ),
             ),
+      // TODO: optimize this title (make it bold) in UI optimization
       title: Text(title),
       actions: actions,
     );

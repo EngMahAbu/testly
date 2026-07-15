@@ -7,6 +7,8 @@ import 'package:testly/features/auth/data/models/password_reset_email_request.da
 import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_response.dart';
 
 part 'auth_api_client.g.dart';
 
@@ -21,4 +23,8 @@ abstract class AuthApiClient {
 
   @POST(Endpoints.forgetPassword)
   Future<PasswordResetEmailResponse> sendPasswordResetEmail(@Body() PasswordResetEmailRequest passwordResetEmailRequest);
+
+  @POST(Endpoints.verifyResetCode)
+  Future<VerifyResetCodeResponse> verifyResetCode(
+      @Body() VerifyResetCodeRequest verifyResetCodeRequest);
 }
