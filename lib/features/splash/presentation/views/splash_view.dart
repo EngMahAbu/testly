@@ -6,7 +6,7 @@ import 'package:testly/features/splash/presentation/views/wedgits/splash_viewbod
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
