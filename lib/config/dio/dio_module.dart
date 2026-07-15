@@ -11,25 +11,31 @@ abstract class DioModule {
       TokenService(secureStorageService);
 
   @singleton
-  Dio dio(SecureStorageService secureStorageService, TokenService tokenService) {
+  Dio dio(
+    SecureStorageService secureStorageService,
+    TokenService tokenService,
+  ) {
     final dio = Dio(
       BaseOptions(
         baseUrl: Endpoints.baseUrl,
-        
+        sendTimeout: Duration(seconds: 10),
+        receiveTimeout: Duration(seconds: 10),
       ),
     );
 
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        try {
-          final token = await tokenService.getToken();
-          if (token != null && options.headers['token'] == null) {
-            options.headers['token'] = token;
-          }
-        } catch (_) {}
-        return handler.next(options);
-      },
-    ));
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          try {
+            final token = await tokenService.getToken();
+            if (token != null && options.headers['token'] == null) {
+              options.headers['token'] = token;
+            }
+          } catch (_) {}
+          return handler.next(options);
+        },
+      ),
+    );
 
     return dio;
   }
@@ -37,5 +43,3 @@ abstract class DioModule {
   @singleton
   SecureStorageService get secureStorageService => SecureStorageService();
 }
-
- 

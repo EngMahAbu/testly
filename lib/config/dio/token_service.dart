@@ -19,10 +19,8 @@ class TokenService {
     }
   }
 
-  Future<void> clear({bool clearStorage = false}) async {
+  Future<void> clear() async {
     _inMemoryToken = null;
-    if (clearStorage) {
-      await _storage.deleteToken();
-    }
+    await _storage.deleteToken();
   }
 }

@@ -27,8 +27,6 @@ import '../../features/auth/data/repositories/auth_repository_impl.dart'
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
 import '../../features/auth/domain/use_cases/login_usecase.dart' as _i1012;
 import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
-import '../../features/auth/domain/use_cases/token_usecases/token_usecases.dart'
-    as _i78;
 import '../../features/auth/presentation/login/view_model/cubit/login_cubit.dart'
     as _i397;
 import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
@@ -69,6 +67,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i947.TokenService>(
       () => dioModule.tokenService(gh<_i741.SecureStorageService>()),
     );
+    gh.factory<_i670.SplashCubit>(
+      () => _i670.SplashCubit(gh<_i947.TokenService>()),
+    );
     gh.singleton<_i361.Dio>(
       () => dioModule.dio(
         gh<_i741.SecureStorageService>(),
@@ -105,19 +106,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i571.SignupUseCase>(
       () => _i571.SignupUseCase(gh<_i787.AuthRepository>()),
     );
-    gh.factory<_i78.SaveTokenUseCase>(
-      () => _i78.SaveTokenUseCase(gh<_i787.AuthRepository>()),
-    );
-    gh.factory<_i78.GetTokenUseCase>(
-      () => _i78.GetTokenUseCase(gh<_i787.AuthRepository>()),
-    );
-    gh.factory<_i78.DeleteTokenUseCase>(
-      () => _i78.DeleteTokenUseCase(gh<_i787.AuthRepository>()),
-    );
     gh.factory<_i397.LoginViewModel>(
       () => _i397.LoginViewModel(
         gh<_i1012.LoginUseCase>(),
-        gh<_i78.SaveTokenUseCase>(),
         gh<_i947.TokenService>(),
       ),
     );
@@ -126,9 +117,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1073.SignupViewModel>(
       () => _i1073.SignupViewModel(gh<_i571.SignupUseCase>()),
-    );
-    gh.factory<_i670.SplashCubit>(
-      () => _i670.SplashCubit(gh<_i78.GetTokenUseCase>()),
     );
     gh.factory<_i274.ExamCubit>(
       () => _i274.ExamCubit(

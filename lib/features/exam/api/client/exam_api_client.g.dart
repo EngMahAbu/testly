@@ -56,7 +56,7 @@ class _ExamApiClient implements ExamApiClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/exams',
+            '/exams?',
             queryParameters: queryParameters,
             data: _data,
           )

@@ -36,6 +36,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   Widget build(BuildContext context) {
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
+        
         if (state is SplashAuthenticated) {
           Navigator.pushReplacement(
             context,
