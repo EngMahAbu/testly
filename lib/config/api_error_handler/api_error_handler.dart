@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/core/constants/app_strings.dart';
-import 'package:testly/features/auth/data/models/signup_response.dart';
-
 abstract final class ApiErrorHandler {
-  static ErrorResponse<SignupResponse> handleException(Exception exception) {
+  static ErrorResponse<T> handleException<T>(Exception exception) {
     if (exception is! DioException) {
       return ErrorResponse(AppStrings.generalErrorMessage);
     }
@@ -33,7 +31,7 @@ abstract final class ApiErrorHandler {
     }
   }
 
-  static ErrorResponse<SignupResponse> _handleStatusCode(Response response) {
+  static ErrorResponse<T> _handleStatusCode<T>(Response response) {
     final statusCode = response.statusCode;
     final data = response.data;
 

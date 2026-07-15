@@ -1,8 +1,9 @@
 abstract final class AppStrings {
   // UI Strings
   static const signupScreenTitle = 'Sign Up';
+  static const loginScreenTitle = 'Log In';
   static const usernameTextFieldLabel = 'User name';
-  static const usernameTextFieldHint = 'Enter your user name';
+  static const usernameTextFieldHint = 'Enter your user name'; 
   static const firstNameTextFieldLabel = 'First name';
   static const firstNameTextFieldHint = 'Enter first name';
   static const lastNameTextFieldLabel = 'Last name';
@@ -10,13 +11,14 @@ abstract final class AppStrings {
   static const emailTextFieldLabel = 'Email';
   static const emailTextFieldHint = 'Enter your email';
   static const passwordTextFieldLabel = 'Password';
-  static const passwordTextFieldHint = 'Enter password';
+  static const passwordTextFieldHint = 'Enter password'; 
   static const confirmPasswordTextFieldLabel = 'Confirm password';
   static const confirmPasswordTextFieldHint = 'Confirm password';
   static const phoneNumberTextFieldLabel = 'Phone number';
   static const phoneNumberTextFieldHint = 'Enter phone number';
   static const signupButton = 'Signup';
   static const alreadyHaveAccount = 'Already have an account?';
+  static const dontHaveAccount = "Don't have an account?";
   static const loginButton = 'Login';
 
   // API Response Messages
