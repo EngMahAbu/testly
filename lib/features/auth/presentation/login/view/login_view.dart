@@ -10,6 +10,7 @@ import 'package:testly/features/auth/presentation/login/view_model/cubit/login_s
 import 'package:testly/features/auth/presentation/login/widgets/dont_have_account.dart';
 import 'package:testly/features/auth/presentation/login/widgets/remember_me_and_forget_password.dart';
 
+import 'package:testly/features/splash/presentation/views/wedgits/test.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -45,7 +46,13 @@ class _LoginViewState extends State<LoginView> {
                 backgroundColor: AppColors.blue,
               ),
             );
-          
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    Test(),
+              ),
+            );
           } else if (state.login!.errorMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -175,6 +182,7 @@ class _LoginViewState extends State<LoginView> {
                       const DontHaveAccount(),
 
                       SizedBox(height: 33),
+                      
                     ],
                   ),
                 ),

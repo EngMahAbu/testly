@@ -4,6 +4,7 @@ import 'package:testly/core/constants/app_constants.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_state.dart';
+import 'package:testly/features/splash/presentation/views/wedgits/test.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -37,7 +38,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
       listener: (context, state) {
         
         if (state is SplashAuthenticated) {
-      
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Test()),
+          );
         }
 
         if (state is SplashUnauthenticated) {
