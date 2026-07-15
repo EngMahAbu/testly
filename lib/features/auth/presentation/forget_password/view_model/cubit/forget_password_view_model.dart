@@ -19,8 +19,9 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     this._verifyResetCodeUseCase,
   ) : super(
         ForgetPasswordState(
+          screenSection: EmailSendSection(),
           passwordResetEmail: BaseState<UserEntity>(),
-          // verifyResetCode: BaseState<UserEntity>(),
+          verifyResetCode: BaseState<UserEntity>(),
         ),
       );
 
@@ -37,13 +38,13 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
       case SuccessResponse<UserEntity>():
         emit(
           state.copyWith(
+            screenSection: VerificationCodeSection(),
             passwordResetEmail: BaseState<UserEntity>(
               isLoading: false,
               data: passwordResetEmailResponse.data,
             ),
           ),
         );
-        emit(state.copyWith(verifyResetCode: BaseState<UserEntity>()));
       case ErrorResponse<UserEntity>():
         emit(
           state.copyWith(
@@ -58,10 +59,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
 
   void verifyResetCode(String resetCode) async {
     emit(
-      state.copyWith(
-        passwordResetEmail: BaseState<UserEntity>(),
-        verifyResetCode: BaseState<UserEntity>(isLoading: true),
-      ),
+      state.copyWith(verifyResetCode: BaseState<UserEntity>(isLoading: true)),
     );
     final verifyResetCodeResponse = await _verifyResetCodeUseCase(
       VerifyResetCodeRequest(resetCode: resetCode),
@@ -70,6 +68,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
       case SuccessResponse<UserEntity>():
         emit(
           state.copyWith(
+            screenSection: PasswordResetSection(),
             verifyResetCode: BaseState<UserEntity>(
               isLoading: false,
               data: verifyResetCodeResponse.data,

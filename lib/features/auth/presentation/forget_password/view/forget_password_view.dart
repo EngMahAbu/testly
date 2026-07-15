@@ -5,6 +5,7 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/ui/widgets/main_app_bar.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/email_section.dart';
+import 'package:testly/features/auth/presentation/forget_password/view/widgets/reset_section.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/verification_section.dart';
 import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_state.dart';
 import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_view_model.dart';
@@ -26,68 +27,81 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
       create: (context) => _forgetPasswordViewModel,
       child: BlocListener<ForgetPasswordViewModel, ForgetPasswordState>(
         listener: (context, state) {
-          if (state.verifyResetCode!.isLoading) {
-            // TODO: Modify this when endpoint is fixed
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              barrierColor: Colors.black.withAlpha(100),
-              builder: (BuildContext context) {
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
+          // TODO: This could be improved, search for a design pattern or a simpler approach
+          switch (state.screenSection) {
+            case EmailSendSection():
+              if (state.passwordResetEmail!.data != null) {
+                // TODO: Modify this when endpoint is fixed
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${state.passwordResetEmail!.data!.firstName} Signed Up',
+                    ),
+                    backgroundColor: AppColors.blue,
+                  ),
                 );
-              },
-            );
-          } else if (state.verifyResetCode!.data != null) {
-            // TODO: Modify this when endpoint is fixed
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  '${state.verifyResetCode!.data!.firstName} Code Verified',
-                ),
-                backgroundColor: AppColors.blue,
-              ),
-            );
-          } else if (state.verifyResetCode!.errorMessage.isNotEmpty) {
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.verifyResetCode!.errorMessage),
-                backgroundColor: AppColors.lightRed,
-              ),
-            );
-          } else if (state.passwordResetEmail!.data != null) {
-            // TODO: Modify this when endpoint is fixed
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  '${state.passwordResetEmail!.data!.firstName} Signed Up',
-                ),
-                backgroundColor: AppColors.blue,
-              ),
-            );
-          } else if (state.passwordResetEmail!.errorMessage.isNotEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.passwordResetEmail!.errorMessage),
-                backgroundColor: AppColors.lightRed,
-              ),
-            );
+              } else if (state.passwordResetEmail!.errorMessage.isNotEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.passwordResetEmail!.errorMessage),
+                    backgroundColor: AppColors.lightRed,
+                  ),
+                );
+              }
+            case VerificationCodeSection():
+              if (state.verifyResetCode!.isLoading) {
+                // TODO: Modify this when endpoint is fixed
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  barrierColor: Colors.black.withAlpha(100),
+                  builder: (BuildContext context) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    );
+                  },
+                );
+              } else if (state.verifyResetCode!.data != null) {
+                // TODO: Modify this when endpoint is fixed
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${state.verifyResetCode!.data!.firstName} Code Verified',
+                    ),
+                    backgroundColor: AppColors.blue,
+                  ),
+                );
+              } else if (state.verifyResetCode!.errorMessage.isNotEmpty) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.verifyResetCode!.errorMessage),
+                    backgroundColor: AppColors.lightRed,
+                  ),
+                );
+              }
+            case PasswordResetSection():
+              print('object');
           }
         },
         child: Scaffold(
           appBar: MainAppBar(title: AppStrings.forgetPasswordScreenTitle),
           body: BlocBuilder<ForgetPasswordViewModel, ForgetPasswordState>(
             builder: (context, state) {
-              if (state.verifyResetCode != null) {
-                return VerificationSection(
-                  forgetPasswordViewModel: _forgetPasswordViewModel,
-                );
-              } else {
-                return EmailSection(
-                  forgetPasswordViewModel: _forgetPasswordViewModel,
-                );
+              switch (state.screenSection) {
+                case EmailSendSection():
+                  return EmailSection(
+                    forgetPasswordViewModel: _forgetPasswordViewModel,
+                  );
+                case VerificationCodeSection():
+                  return VerificationSection(
+                    forgetPasswordViewModel: _forgetPasswordViewModel,
+                  );
+                case PasswordResetSection():
+                  return ResetSection(
+                    forgetPasswordViewModel: _forgetPasswordViewModel,
+                  );
               }
             },
           ),
