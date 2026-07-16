@@ -6,6 +6,7 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import 'package:testly/features/auth/presentation/login/view_model/cubit/login_events.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 import 'package:testly/features/auth/presentation/login/widgets/dont_have_account.dart';
 import 'package:testly/features/auth/presentation/login/widgets/remember_me_and_forget_password.dart';
@@ -48,10 +49,7 @@ class _LoginViewState extends State<LoginView> {
             );
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    Test(),
-              ),
+              MaterialPageRoute(builder: (context) => Test()),
             );
           } else if (state.login!.errorMessage.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -160,10 +158,12 @@ class _LoginViewState extends State<LoginView> {
                               setState(() {
                                 errorMessage = null;
                               });
-                              context.read<LoginViewModel>().login(
-                                LoginRequest(
-                                  email: emailController.text,
-                                  password: passwordController.text,
+                              context.read<LoginViewModel>().doEvents(
+                                LoginSucces(
+                                  loginRequest: LoginRequest(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
                                 ),
                               );
                             }
@@ -182,7 +182,6 @@ class _LoginViewState extends State<LoginView> {
                       const DontHaveAccount(),
 
                       SizedBox(height: 33),
-                      
                     ],
                   ),
                 ),

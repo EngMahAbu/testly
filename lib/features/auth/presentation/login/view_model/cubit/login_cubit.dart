@@ -8,6 +8,7 @@ import 'package:testly/features/auth/domain/entities/login_entity.dart';
 import 'package:testly/features/auth/domain/entities/user_entity.dart';
 import 'package:testly/features/auth/domain/use_cases/login_usecase.dart';
 import 'package:testly/config/dio/token_service.dart';
+import 'package:testly/features/auth/presentation/login/view_model/cubit/login_events.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 
 @injectable
@@ -19,8 +20,15 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel(this._loginUseCase, this._tokenService) : super(LoginState()) {
     state.login = BaseState<UserEntity>();
   }
+  void doEvents(LoginEvents event){
+    switch (event) {
+     
+      case LoginSucces():
+         _login(event.loginRequest);
+    }
+  }
 
-  Future<void> login(LoginRequest loginRequest) async {
+  Future<void> _login(LoginRequest loginRequest) async {
     emit(state.copyWith(login: BaseState<UserEntity>(isLoading: true)));
 
     final loginResponse = await _loginUseCase(loginRequest);
