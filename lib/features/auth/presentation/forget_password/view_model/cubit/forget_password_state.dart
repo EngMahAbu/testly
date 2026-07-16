@@ -5,22 +5,26 @@ class ForgetPasswordState {
   ForgetPasswordScreenSection screenSection;
   BaseState<UserEntity>? passwordResetEmail;
   BaseState<UserEntity>? verifyResetCode;
+  BaseState<UserEntity>? resetPassword;
 
   ForgetPasswordState({
     ForgetPasswordScreenSection? screenSection,
     this.passwordResetEmail,
     this.verifyResetCode,
+    this.resetPassword,
   }) : screenSection = screenSection ?? EmailSendSection();
 
   ForgetPasswordState copyWith({
     ForgetPasswordScreenSection? screenSection,
     BaseState<UserEntity>? passwordResetEmail,
     BaseState<UserEntity>? verifyResetCode,
+    BaseState<UserEntity>? resetPassword,
   }) {
     return ForgetPasswordState(
       screenSection: screenSection ?? this.screenSection,
       passwordResetEmail: passwordResetEmail ?? this.passwordResetEmail,
       verifyResetCode: verifyResetCode ?? this.verifyResetCode,
+      resetPassword: resetPassword ?? this.resetPassword,
     );
   }
 }

@@ -28,6 +28,11 @@ abstract final class AppStrings {
   static const invalidOtpCode = 'Invalid Code';
   static const didntReceiveCode = 'Didn\'t receive code?';
   static const resendButton = 'Resend';
+  static const resetSectionSubTitle = 'Reset password';
+  static const resetSectionNote =
+      'Password must not be empty and must contain 8 characters with upper- and lower-case letters and one number at least';
+  static const newPassword = 'New password';
+  static const continueButton = 'Continue';
 
   // API Response Messages
   static const generalErrorMessage =

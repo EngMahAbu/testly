@@ -3,4 +3,5 @@ abstract final class Endpoints {
   static const signup = 'auth/signup';
   static const forgetPassword = 'auth/forgotPassword';
   static const verifyResetCode = 'auth/verifyResetCode';
+  static const resetPassword = 'auth/resetPassword';
 }

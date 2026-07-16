@@ -5,6 +5,8 @@ import 'package:testly/features/auth/api/client/auth_api_client.dart';
 import 'package:testly/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:testly/features/auth/data/models/password_reset_email_request.dart';
 import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
+import 'package:testly/features/auth/data/models/password_reset_request.dart';
+import 'package:testly/features/auth/data/models/password_reset_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
 import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';
@@ -54,6 +56,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return SuccessResponse<VerifyResetCodeResponse>(verifyResetCodeResponse);
     } on Exception catch (e) {
       return ApiErrorHandler.handleException<VerifyResetCodeResponse>(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<PasswordResetResponse>> resetPassword(
+    PasswordResetRequest passwordResetRequest,
+  ) async {
+    try {
+      final passwordResetResponse = await _authApiClient.resetPassword(
+        passwordResetRequest,
+      );
+      return SuccessResponse<PasswordResetResponse>(passwordResetResponse);
+    } on Exception catch (e) {
+      return ApiErrorHandler.handleException<PasswordResetResponse>(e);
     }
   }
 }

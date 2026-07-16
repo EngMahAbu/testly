@@ -21,6 +21,8 @@ import '../../features/auth/data/data_sources/remote/auth_remote_data_source.dar
 import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i153;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
+import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
+    as _i169;
 import '../../features/auth/domain/use_cases/send_password_reset_email_use_case.dart'
     as _i954;
 import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
@@ -50,6 +52,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i787.AuthRepository>(
       () => _i153.AuthRepositoryImpl(gh<_i432.AuthRemoteDataSource>()),
     );
+    gh.factory<_i169.ResetPasswordUseCase>(
+      () => _i169.ResetPasswordUseCase(gh<_i787.AuthRepository>()),
+    );
     gh.factory<_i954.SendPasswordResetEmailUseCase>(
       () => _i954.SendPasswordResetEmailUseCase(gh<_i787.AuthRepository>()),
     );
@@ -63,6 +68,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i361.ForgetPasswordViewModel(
         gh<_i954.SendPasswordResetEmailUseCase>(),
         gh<_i449.VerifyResetCodeUseCase>(),
+        gh<_i169.ResetPasswordUseCase>(),
       ),
     );
     gh.factory<_i1073.SignupViewModel>(
