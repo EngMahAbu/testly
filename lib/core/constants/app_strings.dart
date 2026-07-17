@@ -78,4 +78,15 @@ abstract final class AppStrings {
   static const String browseBySubject = 'Browse by subject';
   static const String notFoundSubjects = "No subjects available";
   static const String notFoundExams = 'No exams available';
+  static const String instructionOne = '• Make sure you have a stable internet connection.';
+  static const String instructionTwo =   '• Read each question carefully before answering.';
+  static const String instructionThree = '• Do not leave or refresh the exam page during the test.';
+  static const String instructionFour = '• Submit your exam before the time runs out.';
+  static const String startButton = 'Start';
+  static const String instructionText = "Instructions";
+  static const String minutesText = "Minutes";
+  static const String enableText = "Enabled";
+  static const String disableText = "Disabled";
+  static const String questionsText = "Questions";
+
 }

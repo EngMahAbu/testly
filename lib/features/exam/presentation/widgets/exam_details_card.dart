@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
+import 'package:testly/core/constants/app_constants.dart';
+import 'package:testly/core/constants/app_strings.dart';
 
 class ExamDetailsCard extends StatelessWidget {
   const ExamDetailsCard({
@@ -40,7 +42,7 @@ class ExamDetailsCard extends StatelessWidget {
                 width: 60,
                 height: 70,
                 child: Image.asset(
-                  "assets/images/Profit.png",
+                  AppConstant.profitImage,
                   fit: BoxFit.contain,
                   errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
                 ),
@@ -48,7 +50,7 @@ class ExamDetailsCard extends StatelessWidget {
               const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
                   SizedBox(height: 16),
 
@@ -64,7 +66,7 @@ class ExamDetailsCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "$numOfQuestion Questions",
+                        "$numOfQuestion ${AppStrings.questionsText}",
                         style: TextStyle(
                           color: AppColors.black,
                           fontSize: 13,
@@ -76,14 +78,14 @@ class ExamDetailsCard extends StatelessWidget {
                   SizedBox(height: 16),
                   isActive
                       ? Text(
-                          "Enabled",
+                          AppStrings.enableText,
                           style: TextStyle(
                             color: AppColors.lightGreen,
                             fontWeight: FontWeight.bold,
                           ),
                         )
                       : Text(
-                          "Disabled",
+                          AppStrings.disableText,
                           style: TextStyle(
                             color: AppColors.lightRed,
                             fontWeight: FontWeight.bold,
@@ -97,7 +99,7 @@ class ExamDetailsCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 16),
             child: Text(
-              "$duration Minutes",
+              "$duration ${AppStrings.minutesText}",
               style: TextStyle(
                 color: AppColors.blue,
                 fontSize: 13,
@@ -105,10 +107,6 @@ class ExamDetailsCard extends StatelessWidget {
               ),
             ),
           ),
-
-          // Expanded(
-          //   child: Text(exams[0].active.toString(), maxLines: 1, overflow: TextOverflow.ellipsis),
-          // ),
           SizedBox(width: 24),
         ],
       ),
