@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/features/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import 'package:testly/features/auth/presentation/login/view_model/cubit/login_view_model.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 
 class RememberMeAndForgetPassword extends StatefulWidget {

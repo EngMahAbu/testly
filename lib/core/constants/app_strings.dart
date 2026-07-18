@@ -71,11 +71,4 @@ abstract final class AppStrings {
   static const String phoneValidationError =
       'Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015 followed by 8 digits.';
   static const String confirmPasswordError = 'Passwords do not match';
-
-  // Exam Feature
-  static const examScreenTitle = 'Survey';
-  static const searchHint = 'Search';
-  static const String browseBySubject = 'Browse by subject';
-  static const String notFoundSubjects = "No subjects available";
-  static const String notFoundExams = 'No exams available';
 }

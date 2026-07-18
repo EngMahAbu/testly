@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:testly/config/base_response/base_response.dart';
-
 import 'package:testly/config/base_state/base_state.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/domain/entities/login_entity.dart';
@@ -20,11 +19,10 @@ class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel(this._loginUseCase, this._tokenService) : super(LoginState()) {
     state.login = BaseState<UserEntity>();
   }
-  void doEvents(LoginEvents event){
+  void doEvents(LoginEvents event) {
     switch (event) {
-     
       case LoginSucces():
-         _login(event.loginRequest);
+        _login(event.loginRequest);
     }
   }
 
