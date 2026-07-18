@@ -27,7 +27,7 @@ import '../../features/auth/data/repositories/auth_repository_impl.dart'
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
 import '../../features/auth/domain/use_cases/login_usecase.dart' as _i1012;
 import '../../features/auth/domain/use_cases/signup_use_case.dart' as _i571;
-import '../../features/auth/presentation/login/view_model/cubit/login_cubit.dart'
+import '../../features/auth/presentation/login/view_model/cubit/login_view_model.dart'
     as _i397;
 import '../../features/auth/presentation/signup/view_model/cubit/signup_view_model.dart'
     as _i1073;
@@ -48,7 +48,7 @@ import '../../features/splash/presentation/view_models/splash_cubit.dart'
     as _i670;
 import '../dio/dio_module.dart' as _i977;
 import '../dio/token_service.dart' as _i947;
-import '../storage_module/storage.dart' as _i741;
+import '../storage_module/token_storage.dart' as _i741;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt

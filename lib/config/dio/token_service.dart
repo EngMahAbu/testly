@@ -1,4 +1,4 @@
-import 'package:testly/config/storage_module/storage.dart';
+import 'package:testly/config/storage_module/token_storage.dart';
 
 class TokenService {
   final SecureStorageService _storage;

@@ -5,7 +5,7 @@ import 'package:testly/config/form_validator/form_validator.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/auth/data/models/login_request.dart';
-import 'package:testly/features/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import 'package:testly/features/auth/presentation/login/view_model/cubit/login_view_model.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_events.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 import 'package:testly/features/auth/presentation/login/widgets/dont_have_account.dart';

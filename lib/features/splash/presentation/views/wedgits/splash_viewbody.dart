@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testly/core/constants/app_constants.dart';
+import 'package:testly/core/constants/app_images.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/exam/presentation/view/subjects_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
@@ -61,7 +61,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             builder: (context, _) {
               return SlideTransition(
                 position: slidelogo,
-                child: Image.asset(AppConstant.testlyImage, width: 130),
+                child: Image.asset(AppImages.testlyLogo, width: 130),
               );
             },
           ),

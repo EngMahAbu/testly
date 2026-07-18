@@ -1,4 +1,4 @@
-import 'package:testly/config/storage_module/storage.dart';
+import 'package:testly/config/storage_module/token_storage.dart';
 import 'package:testly/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as: AuthLocalDataSource)
