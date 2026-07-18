@@ -83,6 +83,8 @@ abstract final class AppStrings {
   static const String instructionThree = '• Do not leave or refresh the exam page during the test.';
   static const String instructionFour = '• Submit your exam before the time runs out.';
   static const String startButton = 'Start';
+  static const String backButton = 'Back';
+  static const String nextButton = 'Next';
   static const String instructionText = "Instructions";
   static const String minutesText = "Minutes";
   static const String enableText = "Enabled";

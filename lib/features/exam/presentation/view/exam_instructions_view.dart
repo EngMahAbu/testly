@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/exam/domain/entities/exam_entity.dart';
+import 'package:testly/features/exam/presentation/view/question_view.dart';
 import 'package:testly/features/exam/presentation/widgets/exam_description.dart';
 import 'package:testly/features/exam/presentation/widgets/instructions_details.dart';
 
@@ -28,8 +29,16 @@ class ExamInstructionsView extends StatelessWidget {
             width: 340,
             height: 48,
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text(AppStrings.startButton, style: TextStyle(fontSize: 16)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuestionView()),
+                );
+              },
+              child: Text(
+                AppStrings.startButton,
+                style: TextStyle(fontSize: 16),
+              ),
             ),
           ),
         ],
