@@ -7,6 +7,8 @@ import 'package:testly/features/auth/data/models/password_reset_email_request.da
 import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
 import 'package:testly/features/auth/data/models/password_reset_request.dart';
 import 'package:testly/features/auth/data/models/password_reset_response.dart';
+import 'package:testly/features/auth/data/models/login_request.dart';
+import 'package:testly/features/auth/data/models/login_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
 import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';
@@ -19,6 +21,9 @@ part 'auth_api_client.g.dart';
 abstract class AuthApiClient {
   @factoryMethod
   factory AuthApiClient(Dio dio) = _AuthApiClient;
+
+  @POST(Endpoints.signIn)
+  Future<LoginResponse> login(@Body() LoginRequest request);
 
   @POST(Endpoints.signup)
   Future<SignupResponse> signup(@Body() SignupRequest signupRequest);

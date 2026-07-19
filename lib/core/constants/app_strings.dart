@@ -1,6 +1,7 @@
 abstract final class AppStrings {
   // UI Strings
   static const signupScreenTitle = 'Sign Up';
+  static const loginScreenTitle = 'Log In';
   static const usernameTextFieldLabel = 'User name';
   static const usernameTextFieldHint = 'Enter your user name';
   static const firstNameTextFieldLabel = 'First name';
@@ -17,6 +18,7 @@ abstract final class AppStrings {
   static const phoneNumberTextFieldHint = 'Enter phone number';
   static const signupButton = 'Signup';
   static const alreadyHaveAccount = 'Already have an account?';
+  static const dontHaveAccount = "Don't have an account?";
   static const loginButton = 'Login';
   static const forgetPasswordScreenTitle = 'Password';
   static const emailSectionSubTitle = 'Forget password';

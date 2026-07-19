@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/ui/theme/app_theme.dart';
-import 'features/auth/presentation/login/view/login_view.dart';
+import 'package:testly/features/splash/presentation/views/splash_view.dart';
 
 void main() {
   configureDependencies();
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: LoginView(),
+      home: SplashView(),
     );
   }
 }

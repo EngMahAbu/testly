@@ -7,6 +7,7 @@ import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
+import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/auth/presentation/signup/view_model/cubit/signup_state.dart';
 import 'package:testly/features/auth/presentation/signup/view_model/cubit/signup_view_model.dart';
 
@@ -227,7 +228,11 @@ class _SignupViewState extends State<SignupView> {
                           style: AppStyles.defaultText,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginView()));
+
+                          },
                           child: Text(
                             AppStrings.loginButton,
                             style: AppStyles.linkStyledTextButton,
