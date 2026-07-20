@@ -5,8 +5,9 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_state.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_view_model.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_event.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_state.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
 
 class EmailSection extends StatefulWidget {
   final ForgetPasswordViewModel _forgetPasswordViewModel;
@@ -22,7 +23,6 @@ class EmailSection extends StatefulWidget {
 
 class _EmailSectionState extends State<EmailSection> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final TextEditingController emailController = TextEditingController();
 
   @override
@@ -61,8 +61,8 @@ class _EmailSectionState extends State<EmailSection> {
                 child: ElevatedButton(
                   onPressed: () async {
                     // if (formKey.currentState!.validate()) {
-                    widget._forgetPasswordViewModel.sendResetCodeEmail(
-                      emailController.text,
+                    widget._forgetPasswordViewModel.doEvent(
+                        SendResetCodeEmail(emailController.text)
                     );
                     // }
                   },

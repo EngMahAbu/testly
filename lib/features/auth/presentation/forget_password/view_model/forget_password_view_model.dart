@@ -9,14 +9,30 @@ import 'package:testly/features/auth/domain/entities/user_entity.dart';
 import 'package:testly/features/auth/domain/use_cases/reset_password_use_case.dart';
 import 'package:testly/features/auth/domain/use_cases/send_password_reset_email_use_case.dart';
 import 'package:testly/features/auth/domain/use_cases/verify_reset_code_use_case.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_state.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_event.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_state.dart';
 
 @injectable
 class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   final SendPasswordResetEmailUseCase _sendPasswordResetEmailUseCase;
   final VerifyResetCodeUseCase _verifyResetCodeUseCase;
   final ResetPasswordUseCase _resetPasswordUseCase;
-  bool isVerificationCodeDialogShown = false;
+  bool _isVerificationCodeDialogShown = false;
+
+  bool get isVerificationCodeDialogShown => _isVerificationCodeDialogShown;
+
+  void doEvent(ForgetPasswordEvent event) {
+    switch (event) {
+      case SendResetCodeEmail():
+        _sendResetCodeEmail(event.email);
+      case VerifyResetCode():
+        _verifyResetCode(event.resetCode);
+      case ResetPassword():
+        _resetPassword(event.newPassword);
+      case ToggleVerificationCodeLoadingDialog():
+        _toggleVerificationCodeDialog(event.isShown);
+    }
+  }
 
   ForgetPasswordViewModel(
     this._sendPasswordResetEmailUseCase,
@@ -32,9 +48,9 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
       );
 
   // TODO: remove this when user management is handled
-  final String userEmail = '';
+  final String _userEmail = '';
 
-  void sendResetCodeEmail(String email) async {
+  void _sendResetCodeEmail(String email) async {
     emit(
       state.copyWith(
         passwordResetEmail: BaseState<UserEntity>(isLoading: true),
@@ -66,7 +82,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  void verifyResetCode(String resetCode) async {
+  void _verifyResetCode(String resetCode) async {
     emit(
       state.copyWith(verifyResetCode: BaseState<UserEntity>(isLoading: true)),
     );
@@ -96,10 +112,10 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  void resetPassword(String newPassword) async {
+  void _resetPassword(String newPassword) async {
     emit(state.copyWith(resetPassword: BaseState<UserEntity>(isLoading: true)));
     final resetPasswordResponse = await _resetPasswordUseCase(
-      PasswordResetRequest(email: userEmail, newPassword: newPassword),
+      PasswordResetRequest(email: _userEmail, newPassword: newPassword),
     );
     switch (resetPasswordResponse) {
       case SuccessResponse<UserEntity>():
@@ -124,7 +140,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  void toggleVerificationCodeDialog(bool isShown) {
-    isVerificationCodeDialogShown = isShown;
+  void _toggleVerificationCodeDialog(bool isShown) {
+    _isVerificationCodeDialogShown = isShown;
   }
 }

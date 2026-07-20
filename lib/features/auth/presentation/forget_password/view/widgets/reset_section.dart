@@ -5,8 +5,9 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_state.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_view_model.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_event.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_state.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
 
 class ResetSection extends StatefulWidget {
   final ForgetPasswordViewModel _forgetPasswordViewModel;
@@ -106,8 +107,8 @@ class _ResetSectionState extends State<ResetSection> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      widget._forgetPasswordViewModel.resetPassword(
-                        passwordController.text,
+                      widget._forgetPasswordViewModel.doEvent(
+                          ResetPassword(passwordController.text)
                       );
                     }
                   },

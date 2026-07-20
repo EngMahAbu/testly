@@ -7,8 +7,9 @@ import 'package:testly/core/ui/widgets/main_app_bar.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/email_section.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/reset_section.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/verification_section.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_state.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_view_model.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_event.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_state.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
@@ -61,7 +62,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     );
                   },
                 );
-                _forgetPasswordViewModel.toggleVerificationCodeDialog(true);
+                _forgetPasswordViewModel.doEvent(
+                    ToggleVerificationCodeLoadingDialog(true)
+                );
               } else if (state.verifyResetCode!.data != null) {
                 // TODO: Modify this when endpoint is fixed
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -119,8 +122,8 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 case PasswordResetSection():
                   if (_forgetPasswordViewModel.isVerificationCodeDialogShown) {
                     Navigator.pop(context);
-                    _forgetPasswordViewModel.toggleVerificationCodeDialog(
-                      false,
+                    _forgetPasswordViewModel.doEvent(
+                      ToggleVerificationCodeLoadingDialog(false),
                     );
                   }
                   return ResetSection(

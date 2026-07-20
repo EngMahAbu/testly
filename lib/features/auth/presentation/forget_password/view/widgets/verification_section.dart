@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/features/auth/presentation/forget_password/view/widgets/otp_view.dart';
-import 'package:testly/features/auth/presentation/forget_password/view_model/cubit/forget_password_view_model.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_event.dart';
+import 'package:testly/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
 
 class VerificationSection extends StatefulWidget {
   final ForgetPasswordViewModel _forgetPasswordViewModel;
@@ -41,7 +42,7 @@ class _VerificationSectionState extends State<VerificationSection> {
               itemCount: 4,
               separator: () => SizedBox(width: 15),
               onSubmit: (value) {
-                widget._forgetPasswordViewModel.verifyResetCode(value);
+                widget._forgetPasswordViewModel.doEvent(VerifyResetCode(value));
               },
               showError:
                   widget
