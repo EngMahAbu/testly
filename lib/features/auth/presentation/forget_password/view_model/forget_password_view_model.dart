@@ -51,15 +51,15 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         ),
       );
 
-  void _sendResetCodeEmail(String email) async {
+  void _sendResetCodeEmail(String? email) async {
     emit(
       state.copyWith(
         passwordResetEmail: BaseState<UserEntity>(isLoading: true),
       ),
     );
-    _userEmail = email;
+    _userEmail = email ?? _userEmail;
     final passwordResetEmailResponse = await _sendPasswordResetEmailUseCase(
-      PasswordResetEmailRequest(email: email),
+      PasswordResetEmailRequest(email: email ?? _userEmail),
     );
     switch (passwordResetEmailResponse) {
       case SuccessResponse<UserEntity>():

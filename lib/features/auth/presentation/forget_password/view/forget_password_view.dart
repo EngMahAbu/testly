@@ -26,30 +26,28 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   Widget build(BuildContext context) {
     return BlocProvider<ForgetPasswordViewModel>(
       create: (context) => _forgetPasswordViewModel,
-      child: BlocListener<ForgetPasswordViewModel, ForgetPasswordState>(
-        listener: (context, state) {
-          // TODO: This could be improved, search for a design pattern or a simpler approach
-          switch (state.screenSection) {
-            case EmailSendSection():
-              if (state.passwordResetEmail!.data != null) {
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<ForgetPasswordViewModel, ForgetPasswordState>(
+            listenWhen: (previous, current) =>
+                previous.passwordResetEmail != current.passwordResetEmail,
+            listener: (context, state) {
+              final emailResult = state.passwordResetEmail!;
+              if (!emailResult.isLoading) {
                 // TODO: Modify this when endpoint is fixed
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      '${state.passwordResetEmail!.data!.firstName} Signed Up',
-                    ),
-                    backgroundColor: AppColors.blue,
-                  ),
-                );
-              } else if (state.passwordResetEmail!.errorMessage.isNotEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.passwordResetEmail!.errorMessage),
-                    backgroundColor: AppColors.lightRed,
-                  ),
-                );
+                if (emailResult.data != null) {
+                  _showSnackBar('Email sent to ${emailResult.data!.firstName}');
+                }
+                if (emailResult.errorMessage.isNotEmpty) {
+                  _showSnackBar(emailResult.errorMessage, isError: true);
+                }
               }
-            case VerificationCodeSection():
+            },
+          ),
+          BlocListener<ForgetPasswordViewModel, ForgetPasswordState>(
+            listenWhen: (previous, current) =>
+                previous.verifyResetCode != current.verifyResetCode,
+            listener: (context, state) {
               if (state.verifyResetCode!.isLoading) {
                 // TODO: Modify this when endpoint is fixed
                 showDialog(
@@ -63,50 +61,47 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   },
                 );
                 _forgetPasswordViewModel.doEvent(
-                    ToggleVerificationCodeLoadingDialog(true)
+                  ToggleVerificationCodeLoadingDialog(true),
                 );
-              } else if (state.verifyResetCode!.data != null) {
+              } else if (_forgetPasswordViewModel
+                  .isVerificationCodeDialogShown) {
+                Navigator.pop(context);
+                _forgetPasswordViewModel.doEvent(
+                  ToggleVerificationCodeLoadingDialog(false),
+                );
+
+                final verifyResult = state.verifyResetCode!;
+                if (!verifyResult.isLoading) {
+                  // TODO: Modify this when endpoint is fixed
+                  if (verifyResult.data != null) {
+                    _showSnackBar('Code Verified Successfully');
+                  }
+                  if (verifyResult.errorMessage.isNotEmpty) {
+                    _showSnackBar(verifyResult.errorMessage, isError: true);
+                  }
+                }
+              }
+            },
+          ),
+          BlocListener<ForgetPasswordViewModel, ForgetPasswordState>(
+            listenWhen: (previous, current) =>
+                previous.resetPassword != current.resetPassword,
+            listener: (context, state) {
+              final resetResult = state.resetPassword!;
+              if (!resetResult.isLoading) {
                 // TODO: Modify this when endpoint is fixed
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      '${state.verifyResetCode!.data!.firstName} Code Verified',
-                    ),
-                    backgroundColor: AppColors.blue,
-                  ),
-                );
-              } else if (state.verifyResetCode!.errorMessage.isNotEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.verifyResetCode!.errorMessage),
-                    backgroundColor: AppColors.lightRed,
-                  ),
-                );
+                if (resetResult.data != null) {
+                  _showSnackBar('Password Reset Successfully');
+                }
+                if (resetResult.errorMessage.isNotEmpty) {
+                  _showSnackBar(resetResult.errorMessage, isError: true);
+                }
               }
-            case PasswordResetSection():
-              // TODO: Modify this when endpoint is fixed
-              if (state.resetPassword!.data != null &&
-                  !state.resetPassword!.isLoading) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      '${state.resetPassword!.data?.firstName} Successful',
-                    ),
-                    backgroundColor: AppColors.blue,
-                  ),
-                );
-              } else if (state.resetPassword!.errorMessage.isNotEmpty &&
-                  !state.resetPassword!.isLoading) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.resetPassword!.errorMessage),
-                    backgroundColor: AppColors.lightRed,
-                  ),
-                );
-              }
-          }
-        },
+            },
+          ),
+        ],
         child: Scaffold(
+          // TODO: Fix the back button behaviour
           appBar: MainAppBar(title: AppStrings.forgetPasswordScreenTitle),
           body: BlocBuilder<ForgetPasswordViewModel, ForgetPasswordState>(
             builder: (context, state) {
@@ -120,12 +115,6 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     forgetPasswordViewModel: _forgetPasswordViewModel,
                   );
                 case PasswordResetSection():
-                  if (_forgetPasswordViewModel.isVerificationCodeDialogShown) {
-                    Navigator.pop(context);
-                    _forgetPasswordViewModel.doEvent(
-                      ToggleVerificationCodeLoadingDialog(false),
-                    );
-                  }
                   return ResetSection(
                     forgetPasswordViewModel: _forgetPasswordViewModel,
                   );
@@ -133,6 +122,15 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  void _showSnackBar(String message, {bool isError = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isError ? AppColors.lightRed : AppColors.blue,
       ),
     );
   }

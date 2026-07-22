@@ -14,9 +14,9 @@ String signupRequestToJson(PasswordResetEmailRequest data) =>
 @JsonSerializable()
 class PasswordResetEmailRequest {
   @JsonKey(name: "email")
-  String? email;
+  String email;
 
-  PasswordResetEmailRequest({this.email});
+  PasswordResetEmailRequest({required this.email});
 
   factory PasswordResetEmailRequest.fromJson(Map<String, dynamic> json) =>
       _$PasswordResetEmailRequestFromJson(json);

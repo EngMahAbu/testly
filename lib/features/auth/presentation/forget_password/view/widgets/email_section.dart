@@ -75,7 +75,7 @@ class _EmailSectionState extends State<EmailSection> {
                       : () async {
                           if (formKey.currentState!.validate()) {
                             widget._forgetPasswordViewModel.doEvent(
-                              SendResetCodeEmail(emailController.text),
+                              SendResetCodeEmail(email: emailController.text),
                             );
                           } else {
                             widget._forgetPasswordViewModel.doEvent(

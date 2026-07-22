@@ -60,7 +60,9 @@ class _VerificationSectionState extends State<VerificationSection> {
                 Text(AppStrings.didntReceiveCode, style: AppStyles.defaultText),
                 TextButton(
                   onPressed: () {
-                    // TODO: Implement this button later
+                    widget._forgetPasswordViewModel.doEvent(
+                      SendResetCodeEmail(),
+                    );
                   },
                   child: Text(
                     AppStrings.resendButton,

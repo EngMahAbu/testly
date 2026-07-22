@@ -1,9 +1,9 @@
 sealed class ForgetPasswordEvent {}
 
 class SendResetCodeEmail extends ForgetPasswordEvent {
-  final String email;
+  final String? email;
 
-  SendResetCodeEmail(this.email);
+  SendResetCodeEmail({this.email});
 }
 
 class VerifyResetCode extends ForgetPasswordEvent {
