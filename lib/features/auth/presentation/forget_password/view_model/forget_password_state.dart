@@ -3,12 +3,14 @@ import 'package:testly/features/auth/domain/entities/user_entity.dart';
 
 class ForgetPasswordState {
   ForgetPasswordScreenSection screenSection;
+  bool isMainButtonEnabled;
   BaseState<UserEntity>? passwordResetEmail;
   BaseState<UserEntity>? verifyResetCode;
   BaseState<UserEntity>? resetPassword;
 
   ForgetPasswordState({
     ForgetPasswordScreenSection? screenSection,
+    this.isMainButtonEnabled = true,
     this.passwordResetEmail,
     this.verifyResetCode,
     this.resetPassword,
@@ -16,12 +18,14 @@ class ForgetPasswordState {
 
   ForgetPasswordState copyWith({
     ForgetPasswordScreenSection? screenSection,
+    bool? isMainButtonEnabled,
     BaseState<UserEntity>? passwordResetEmail,
     BaseState<UserEntity>? verifyResetCode,
     BaseState<UserEntity>? resetPassword,
   }) {
     return ForgetPasswordState(
       screenSection: screenSection ?? this.screenSection,
+      isMainButtonEnabled: isMainButtonEnabled ?? this.isMainButtonEnabled,
       passwordResetEmail: passwordResetEmail ?? this.passwordResetEmail,
       verifyResetCode: verifyResetCode ?? this.verifyResetCode,
       resetPassword: resetPassword ?? this.resetPassword,

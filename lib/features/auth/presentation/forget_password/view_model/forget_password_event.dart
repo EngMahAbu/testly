@@ -23,3 +23,9 @@ class ToggleVerificationCodeLoadingDialog extends ForgetPasswordEvent {
 
   ToggleVerificationCodeLoadingDialog(this.isShown);
 }
+
+class ToggleMainButton extends ForgetPasswordEvent {
+  final bool isEnabled;
+
+  ToggleMainButton(this.isEnabled);
+}

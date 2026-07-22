@@ -13,6 +13,7 @@ class MainTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? validationPattern;
   final String? validationErrorMessage;
+  final void Function(String)? onChange;
 
   MainTextField({
     super.key,
@@ -24,6 +25,7 @@ class MainTextField extends StatelessWidget {
     this.validator,
     this.validationPattern,
     this.validationErrorMessage,
+    this.onChange,
   }) : _controller = controller {
     assert(
       !(validationPattern != null &&
@@ -48,6 +50,7 @@ class MainTextField extends StatelessWidget {
       ),
       controller: _controller,
       validator: validator ?? defaultValidator,
+      onChanged: onChange,
     );
   }
 

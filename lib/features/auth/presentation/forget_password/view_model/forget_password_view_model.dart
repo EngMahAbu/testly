@@ -20,6 +20,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   bool _isVerificationCodeDialogShown = false;
 
   bool get isVerificationCodeDialogShown => _isVerificationCodeDialogShown;
+  String _userEmail = '';
 
   void doEvent(ForgetPasswordEvent event) {
     switch (event) {
@@ -31,6 +32,8 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         _resetPassword(event.newPassword);
       case ToggleVerificationCodeLoadingDialog():
         _toggleVerificationCodeDialog(event.isShown);
+      case ToggleMainButton():
+        _toggleMainButton(event.isEnabled);
     }
   }
 
@@ -41,14 +44,12 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   ) : super(
         ForgetPasswordState(
           screenSection: EmailSendSection(),
+          isMainButtonEnabled: true,
           passwordResetEmail: BaseState<UserEntity>(),
           verifyResetCode: BaseState<UserEntity>(),
           resetPassword: BaseState<UserEntity>(),
         ),
       );
-
-  // TODO: remove this when user management is handled
-  final String _userEmail = '';
 
   void _sendResetCodeEmail(String email) async {
     emit(
@@ -56,6 +57,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         passwordResetEmail: BaseState<UserEntity>(isLoading: true),
       ),
     );
+    _userEmail = email;
     final passwordResetEmailResponse = await _sendPasswordResetEmailUseCase(
       PasswordResetEmailRequest(email: email),
     );
@@ -94,6 +96,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         emit(
           state.copyWith(
             screenSection: PasswordResetSection(),
+            isMainButtonEnabled: true,
             verifyResetCode: BaseState<UserEntity>(
               isLoading: false,
               data: verifyResetCodeResponse.data,
@@ -142,5 +145,9 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
 
   void _toggleVerificationCodeDialog(bool isShown) {
     _isVerificationCodeDialogShown = isShown;
+  }
+
+  void _toggleMainButton(bool isEnabled) {
+    emit(state.copyWith(isMainButtonEnabled: isEnabled));
   }
 }

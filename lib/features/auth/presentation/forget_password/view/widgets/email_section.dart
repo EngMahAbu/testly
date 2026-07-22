@@ -53,19 +53,36 @@ class _EmailSectionState extends State<EmailSection> {
                 controller: emailController,
                 validationPattern: FormValidator.emailPattern,
                 validationErrorMessage: AppStrings.emailValidationError,
+                onChange: (_) {
+                  if (!widget
+                          ._forgetPasswordViewModel
+                          .state
+                          .isMainButtonEnabled &&
+                      formKey.currentState!.validate()) {
+                    widget._forgetPasswordViewModel.doEvent(
+                      ToggleMainButton(true),
+                    );
+                  }
+                },
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.06),
               SizedBox(
                 width: double.infinity,
-                // TODO: make this button be disabled while validation in UI optimization
                 child: ElevatedButton(
-                  onPressed: () async {
-                    // if (formKey.currentState!.validate()) {
-                    widget._forgetPasswordViewModel.doEvent(
-                        SendResetCodeEmail(emailController.text)
-                    );
-                    // }
-                  },
+                  onPressed:
+                      !widget._forgetPasswordViewModel.state.isMainButtonEnabled
+                      ? null
+                      : () async {
+                          if (formKey.currentState!.validate()) {
+                            widget._forgetPasswordViewModel.doEvent(
+                              SendResetCodeEmail(emailController.text),
+                            );
+                          } else {
+                            widget._forgetPasswordViewModel.doEvent(
+                              ToggleMainButton(false),
+                            );
+                          }
+                        },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     child:
