@@ -13,7 +13,14 @@ class ExamInstructionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+            leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Column(
         children: [
           ExamDescription(exams: exams),
@@ -29,10 +36,15 @@ class ExamInstructionsView extends StatelessWidget {
             width: 340,
             height: 48,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => QuestionView()),
+                  MaterialPageRoute(
+                    builder: (context) => QuestionsView(
+                      examTime: exams.duration,
+                      examId: exams.id,
+                    ),
+                  ),
                 );
               },
               child: Text(

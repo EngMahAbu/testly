@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_strings.dart';
-import 'package:testly/features/exam/presentation/view/exam_details.dart';
+import 'package:testly/features/exam/presentation/view/exam_details_view.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_cubit.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_state.dart';
 import 'package:testly/features/exam/presentation/widgets/subject_card.dart';
@@ -48,7 +48,7 @@ class SubjectsListview extends StatelessWidget {
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ExamDetails(
+                        builder: (context) => ExamDetailsView(
                           id: subjects[index].id.toString(),
                           title: subjects[index].name.toString(),
                         ),

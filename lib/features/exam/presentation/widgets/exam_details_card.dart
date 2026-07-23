@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
-import 'package:testly/core/constants/app_constants.dart';
+import 'package:testly/core/constants/app_images.dart';
 import 'package:testly/core/constants/app_strings.dart';
 
 class ExamDetailsCard extends StatelessWidget {
@@ -42,7 +42,7 @@ class ExamDetailsCard extends StatelessWidget {
                 width: 60,
                 height: 70,
                 child: Image.asset(
-                  AppConstant.profitImage,
+                  AppImages.profitImage,
                   fit: BoxFit.contain,
                   errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
                 ),
