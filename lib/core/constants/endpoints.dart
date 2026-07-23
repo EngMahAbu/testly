@@ -3,4 +3,9 @@ abstract final class Endpoints {
   static const signIn = 'auth/signin';
 
   static const signup = 'auth/signup';
+  static const subjects = '/subjects';
+  static const exams = '/exams?';
+  static const questions = '/questions?';
+  static const parameterSubject = 'subject';
+  static const parameterExam = 'exam';
 }
