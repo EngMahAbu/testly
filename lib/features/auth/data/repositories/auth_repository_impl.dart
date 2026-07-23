@@ -10,7 +10,7 @@ import 'package:testly/features/auth/domain/repositories/auth_repository.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
 import 'package:testly/features/auth/domain/entities/user_entity.dart';
-@Injectable(as: AuthRepository)
+@Singleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
 
   final AuthRemoteDataSource _authRemoteDataSource;

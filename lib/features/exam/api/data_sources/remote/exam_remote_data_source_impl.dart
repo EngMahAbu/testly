@@ -4,9 +4,10 @@ import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/features/exam/api/client/exam_api_client.dart';
 import 'package:testly/features/exam/data/data_sources/remote/exam_remote_data_source.dart';
 import 'package:testly/features/exam/data/model/exam/exams_response.dart';
+import 'package:testly/features/exam/data/model/question/question_response.dart';
 import 'package:testly/features/exam/data/model/subjects/subjects_response.dart';
 
-@Injectable(as: ExamRemoteDataSource)
+@Singleton(as: ExamRemoteDataSource)
 class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
   final ExamApiClient apiClient;
 
@@ -27,7 +28,17 @@ class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
     try {
       final examResponse = await apiClient.getExams(subjectId);
       return SuccessResponse(examResponse);
-    }on Exception catch (e) {
+    } on Exception catch (e) {
+      return ApiErrorHandler.handleException(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<QuestionResponse>> getQuestions(String examId) async{
+    try {
+      final questionResponse =await apiClient.getQuestions(examId);
+      return SuccessResponse(questionResponse);
+    } on Exception catch (e) {
       return ApiErrorHandler.handleException(e);
     }
   }
