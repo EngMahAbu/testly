@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/features/exam/domain/entities/question_entity.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_cubit.dart';
+import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_events.dart';
 
 class ChoiceListView extends StatelessWidget {
   const ChoiceListView({
@@ -21,9 +22,8 @@ class ChoiceListView extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            context.read<ExamCubit>().selectAnswer(
-              answerKey: answer.key,
-              questionId: questions.id,
+            context.read<ExamCubit>().doEvent(
+              SelectAnswer(questionId: questions.id, answerKey: answer.key),
             );
           },
           child: Container(
@@ -38,10 +38,9 @@ class ChoiceListView extends StatelessWidget {
             child: RadioGroup(
               groupValue: selectedAnswer,
               onChanged: (value) {
-                context.read<ExamCubit>().selectAnswer(
-                  answerKey: value!,
-                  questionId: questions.id,
-                );
+                context.read<ExamCubit>().doEvent(
+              SelectAnswer(questionId: questions.id, answerKey: answer.key),
+            );
               },
               child: Row(
                 children: [

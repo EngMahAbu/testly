@@ -16,4 +16,6 @@ class BaseState<T> {
       data: data ?? this.data,
     );
   }
+
+ 
 }

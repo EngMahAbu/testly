@@ -26,14 +26,14 @@ class QuestionsView extends StatelessWidget {
     return BlocProvider<ExamCubit>(
       create: (_) =>
           getIt.get<ExamCubit>()
-            ..doEvent(GetQuestions(examId: examId, examTime: 1)),
+            ..doEvent(GetQuestions(examId: examId, examTime: examTime)),
       child: PopScope(
         canPop: false,
         child: Scaffold(
           appBar: AppBar(
                 leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+           
           },
           icon: Icon(Icons.arrow_back_ios),
         ),

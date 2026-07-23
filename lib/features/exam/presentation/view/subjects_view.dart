@@ -6,6 +6,7 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_cubit.dart';
+import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_events.dart';
 import 'package:testly/features/exam/presentation/widgets/exam_text_field.dart';
 import 'package:testly/features/exam/presentation/widgets/subjects_listview.dart';
 
@@ -50,7 +51,7 @@ class SubjectsView extends StatelessWidget {
         ],
       ),
       body: BlocProvider<ExamCubit>(
-        create: (context) => getIt.get<ExamCubit>()..getSubjects(),
+        create: (context) => getIt.get<ExamCubit>()..doEvent(GetSubjects()),
         child: SafeArea(
           child: CustomScrollView(
             physics: const BouncingScrollPhysics(),
