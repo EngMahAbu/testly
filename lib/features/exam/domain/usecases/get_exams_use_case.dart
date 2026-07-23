@@ -3,7 +3,7 @@ import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/features/exam/domain/entities/exam_entity.dart';
 import 'package:testly/features/exam/domain/repositories/exam_repository.dart';
 
-@injectable
+@singleton
 class GetExamsUseCase {
   final ExamRepository repository;
 
