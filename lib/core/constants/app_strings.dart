@@ -20,6 +20,21 @@ abstract final class AppStrings {
   static const alreadyHaveAccount = 'Already have an account?';
   static const dontHaveAccount = "Don't have an account?";
   static const loginButton = 'Login';
+  static const forgetPasswordScreenTitle = 'Password';
+  static const emailSectionSubTitle = 'Forget password';
+  static const emailSectionNote =
+      'Please enter your email associated to your account';
+  static const verificationSectionSubTitle = 'Email verification';
+  static const verificationNote =
+      'Please enter your code that was send to your email address';
+  static const invalidOtpCode = 'Invalid Code';
+  static const didntReceiveCode = 'Didn\'t receive code?';
+  static const resendButton = 'Resend';
+  static const resetSectionSubTitle = 'Reset password';
+  static const resetSectionNote =
+      'Password must not be empty and must contain 8 characters with upper- and lower-case letters and one number at least';
+  static const newPassword = 'New password';
+  static const continueButton = 'Continue';
 
   // API Response Messages
   static const generalErrorMessage =

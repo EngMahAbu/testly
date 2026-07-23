@@ -54,6 +54,7 @@ class _SignupViewState extends State<SignupView> {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
+          // TODO: modify this to use the custom app bar widget in UI optimization
           appBar: AppBar(
             leading: const Padding(
               padding: EdgeInsetsDirectional.only(start: 16.0),
@@ -188,12 +189,14 @@ class _SignupViewState extends State<SignupView> {
                     const SizedBox(height: 48),
                     SizedBox(
                       width: double.infinity,
+                      // TODO: make this button be disabled while validation in UI optimization
                       child: ElevatedButton(
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             _signupViewModel.signup(prepareSignupRequest());
                           }
                         },
+                        // TODO: remove this in UI optimization
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.blue,
                         ),
@@ -247,6 +250,7 @@ class _SignupViewState extends State<SignupView> {
     );
   }
 
+  // TODO: move this logic to the view model after asking about it
   SignupRequest prepareSignupRequest() => SignupRequest(
     username: usernameController.text,
     firstName: firstNameController.text,
