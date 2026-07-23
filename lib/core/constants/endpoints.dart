@@ -8,4 +8,5 @@ abstract final class Endpoints {
   static const questions = '/questions?';
   static const parameterSubject = 'subject';
   static const parameterExam = 'exam';
+  static const forgetPassword = 'auth/forgotPassword';
 }
