@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_colors.dart';
+import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_view_model.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 
@@ -34,13 +35,13 @@ class _RememberMeAndForgetPasswordState
               },
             ),
 
-            Text("Remember me", style: TextStyle(fontSize: 13)),
+            Text(AppStrings.rememberMeCheckBox, style: TextStyle(fontSize: 13)),
           ],
         ),
         TextButton(
           onPressed: () {},
           child: Text(
-            "Forget password?",
+            AppStrings.forgetPasswordButton,
             style: TextStyle(color: AppColors.black),
           ),
         ),

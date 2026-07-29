@@ -20,6 +20,8 @@ abstract final class AppStrings {
   static const alreadyHaveAccount = 'Already have an account?';
   static const dontHaveAccount = "Don't have an account?";
   static const loginButton = 'Login';
+  static const forgetPasswordButton = "Forget password?";
+  static const rememberMeCheckBox = "Remember me";
 
   // API Response Messages
   static const generalErrorMessage =
