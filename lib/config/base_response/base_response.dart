@@ -7,7 +7,7 @@ class SuccessResponse<T> extends BaseResponse<T> {
 }
 
 class ErrorResponse<T> extends BaseResponse<T> {
-  final Exception error;
+  final String errorMessage;
 
-  ErrorResponse(this.error);
+  ErrorResponse(this.errorMessage);
 }

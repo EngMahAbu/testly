@@ -1,1 +1,56 @@
-abstract final class AppStrings {}
+abstract final class AppStrings {
+  // UI Strings
+
+  // API Response Messages
+  static const String generalErrorMessage =
+      'Something went wrong. Please try again later.';
+  static const String connectionErrorMessage =
+      'Connection timeout. Please check your internet connection and try again.';
+  static const String noConnectionErrorMessage =
+      'No internet connection. Please check your network and try again.';
+  static const String securityErrorMessage =
+      'Security error. Please try again later.';
+  static const String cancelErrorMessage = 'Request was cancelled.';
+
+  // Status Code Messages
+  static const String code400Message =
+      'Invalid information. Please check your details and try again.';
+  static const String code401Message =
+      'Session expired or invalid credentials. Please log in again.';
+
+  static const String code403Message =
+      'You don\'t have permission to perform this action.';
+  static const String code404Message =
+      'Requested resource not found. Please try again later.';
+  static const String code409Message =
+      'This account already exists. Try logging in instead.';
+  static const String code422Message =
+      'Please check your information and try again.';
+  static const String code429Message =
+      'Too many attempts. Please wait a moment before trying again.';
+  static const String code500sMessage =
+      'Server is temporarily unavailable. Please try again in a few moments.';
+
+  // Form Validation Messages
+  static const String generalValidationError = 'Invalid input';
+  static const String emptyValidationError = 'This field is required';
+  static const String usernameValidationError =
+      'Username must be at least 3 characters long and can only contain letters, numbers, underscores, or dots.';
+  static const String nameValidationError =
+      'Name must be at least 3 characters long and can only contain letters and spaces.';
+  static const String emailValidationError =
+      'Please enter a valid email address (e.g., user@example.com).';
+  static const String passwordLengthValidationError =
+      'Password must be at least 8 characters long.';
+  static const String passwordUppercaseValidationError =
+      'Password must contain at least one uppercase letter.';
+  static const String passwordLowercaseValidationError =
+      'Password must contain at least one lowercase letter.';
+  static const String passwordNumberValidationError =
+      'Password must contain at least one number.';
+  static const String passwordSpecialCharValidationError =
+      'Password must contain at least one special character (#?!@\$%^&*-).';
+  static const String phoneValidationError =
+      'Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015 followed by 8 digits.';
+  static const String confirmPasswordError = 'Passwords do not match';
+}
