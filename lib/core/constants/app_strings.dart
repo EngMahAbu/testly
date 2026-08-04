@@ -1,5 +1,9 @@
 abstract final class AppStrings {
   // UI Strings
+  static const String forgetPasswordScreenTitle = 'Password';
+  static const String forgetPasswordScreenSubTitle = 'Forget password';
+  static const String forgetPasswordScreenNote =
+      'Please enter your email associated to your account';
 
   // API Response Messages
   static const String generalErrorMessage =

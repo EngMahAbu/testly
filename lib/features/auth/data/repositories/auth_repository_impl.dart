@@ -1,0 +1,29 @@
+import 'package:injectable/injectable.dart';
+import 'package:testly/config/base_response/base_response.dart';
+import 'package:testly/features/auth/data/data_sources/remote/auth_remote_data_source.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_request.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
+import 'package:testly/features/auth/domain/entities/user_entity.dart';
+import 'package:testly/features/auth/domain/repositories/auth_repository.dart';
+
+@Singleton(as: AuthRepository)
+class AuthRepositoryImpl implements AuthRepository {
+  final AuthRemoteDataSource _authRemoteDataSource;
+
+  AuthRepositoryImpl(this._authRemoteDataSource);
+
+  @override
+  Future<BaseResponse<UserEntity>> sendPasswordResetEmail(
+    PasswordResetEmailRequest passwordResetEmailRequest,
+  ) async {
+    final response = await _authRemoteDataSource.sendPasswordResetEmail(
+      passwordResetEmailRequest,
+    );
+    switch (response) {
+      case SuccessResponse<PasswordResetEmailResponse>():
+        return SuccessResponse<UserEntity>(response.data!.user!.toEntity());
+      case ErrorResponse<PasswordResetEmailResponse>():
+        return ErrorResponse<UserEntity>(response.errorMessage);
+    }
+  }
+}
