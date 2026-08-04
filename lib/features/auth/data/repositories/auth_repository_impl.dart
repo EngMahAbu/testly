@@ -19,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
       case SuccessResponse<SignupResponse>():
         return SuccessResponse<UserEntity>(response.data!.user!.toEntity());
       case ErrorResponse<SignupResponse>():
-        return ErrorResponse<UserEntity>(response.error);
+        return ErrorResponse<UserEntity>(response.errorMessage);
     }
   }
 }
