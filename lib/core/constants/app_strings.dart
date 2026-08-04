@@ -1,5 +1,18 @@
 abstract final class AppStrings {
   // UI Strings
+  static const forgetPasswordScreenTitle = 'Password';
+  static const forgetPasswordScreenSubTitle = 'Forget password';
+  static const forgetPasswordScreenNote =
+      'Please enter your email associated to your account';
+  static const emailSectionSubTitle = 'Forget password';
+  static const emailSectionNote =
+      'Please enter your email associated to your account';
+  static const verificationSectionSubTitle = 'Email verification';
+  static const verificationNote =
+      'Please enter your code that was send to your email address';
+  static const invalidOtpCode = 'Invalid Code';
+  static const didntReceiveCode = 'Didn\'t receive code?';
+  static const resendButton = 'Resend';
 
   // API Response Messages
   static const String generalErrorMessage =
