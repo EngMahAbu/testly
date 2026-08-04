@@ -39,4 +39,11 @@ abstract final class AppStyles {
     decoration: TextDecoration.underline,
     decorationColor: AppColors.blue,
   );
+
+  static const TextStyle medium18Text = TextStyle(
+    color: AppColors.black,
+    fontWeight: FontWeight.w500,
+    fontFamily: AppConstants.appFont,
+    fontSize: 18,
+  );
 }
