@@ -8,6 +8,6 @@ class ExamResultEntity {
     required this.totalQuestions,
     required this.correctAnswers,
     required this.wrongAnswers,
-    required this.percentage,
+    required this.percentage, Object? examId, Object? finishedAt, Object? reviewQuestions,
   });
 }

@@ -8,8 +8,8 @@ class QuestionEntity {
   final List<AnswerEntity> answers;
   final String type;
   final String correct;
-  final SubjectEntity subject;
-  final ExamEntity exam;
+  final SubjectEntity? subject;
+  final ExamEntity? exam;
   final String createdAt;
 
   const QuestionEntity({

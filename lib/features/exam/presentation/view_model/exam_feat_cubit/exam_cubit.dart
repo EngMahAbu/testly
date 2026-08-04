@@ -4,11 +4,17 @@ import 'package:injectable/injectable.dart';
 import 'package:testly/config/base_response/base_response.dart';
 import 'package:testly/config/base_state/base_state.dart';
 import 'package:testly/features/exam/domain/entities/exam_entity.dart';
+import 'package:testly/features/exam/domain/entities/local_entities/saved_answer_entity.dart';
+import 'package:testly/features/exam/domain/entities/local_entities/saved_exam_entity.dart';
+import 'package:testly/features/exam/domain/entities/local_entities/saved_question_entity.dart';
 import 'package:testly/features/exam/domain/entities/question_entity.dart';
 import 'package:testly/features/exam/domain/entities/subject_entity.dart';
 import 'package:testly/features/exam/domain/usecases/get_exams_use_case.dart';
 import 'package:testly/features/exam/domain/usecases/get_question_use_case.dart';
 import 'package:testly/features/exam/domain/usecases/get_subjects_use_case.dart';
+import 'package:testly/features/exam/domain/usecases/local_usecase/get_saved_exam_usecase.dart';
+import 'package:testly/features/exam/domain/usecases/local_usecase/get_saved_exams_usecase.dart';
+import 'package:testly/features/exam/domain/usecases/local_usecase/save_exam_usecase.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_events.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_state.dart';
 
@@ -19,6 +25,9 @@ class ExamCubit extends Cubit<ExamState> {
   final GetSubjectsUseCase _getSubjectsUseCase;
   final GetExamsUseCase _getExamsUseCase;
   final GetQuestionUseCase _getQuestionUseCase;
+  final SaveExamUseCase saveExamUseCase;
+  final GetSavedExamsUseCase getSavedExamsUseCase;
+  final GetSavedExamUseCase getSavedExamUseCase;
   Timer? _timer;
   // bool isTimeout = false;
   Map<String, String> selectedAnswers = {};
@@ -26,6 +35,9 @@ class ExamCubit extends Cubit<ExamState> {
     this._getSubjectsUseCase,
     this._getExamsUseCase,
     this._getQuestionUseCase,
+    this.saveExamUseCase,
+    this.getSavedExamsUseCase,
+    this.getSavedExamUseCase,
   ) : super(ExamState(subjects: BaseState()));
 
   void doEvent(ExamEvents event) {
@@ -35,7 +47,7 @@ class ExamCubit extends Cubit<ExamState> {
       case GetExams():
         _getExams(event.subjectId);
       case GetQuestions():
-        _getQuestions(event.examId, event.examTime);
+        _getQuestions(event.exam);
       case NextQuestion():
         _nextQuestion();
       case PreviousQuestion():
@@ -44,6 +56,10 @@ class ExamCubit extends Cubit<ExamState> {
         _submitExam();
       case SelectAnswer():
         _selectAnswer(questionId: event.questionId, answerKey: event.answerKey);
+      case GetSavedExams():
+        _getSavedExams();
+      case GetSavedExam():
+        _getSavedExam(event.examId);
     }
   }
 
@@ -97,16 +113,17 @@ class ExamCubit extends Cubit<ExamState> {
     }
   }
 
-  Future<void> _getQuestions(String examId, int examTime) async {
+  Future<void> _getQuestions(ExamEntity exam) async {
     emit(
       state.copyWith(questions: BaseState(isLoading: true, errorMessage: '')),
     );
 
-    final questionsResponse = await _getQuestionUseCase.call(examId);
+    final questionsResponse = await _getQuestionUseCase.call(exam.id);
     switch (questionsResponse) {
       case SuccessResponse<List<QuestionEntity>>():
         emit(
           state.copyWith(
+            currentExam: exam,
             questions: BaseState(
               isLoading: false,
               data: questionsResponse.data,
@@ -114,7 +131,8 @@ class ExamCubit extends Cubit<ExamState> {
             currentQuestionIndex: 0,
           ),
         );
-        _startTimer(examTime);
+
+        _startTimer(exam.duration);
       case ErrorResponse<List<QuestionEntity>>():
         emit(
           state.copyWith(
@@ -196,6 +214,37 @@ class ExamCubit extends Cubit<ExamState> {
         percentage: (correctAnswers / totalQuestions) * 100,
       );
 
+      if (state.currentExam == null) {
+        throw Exception("currentExam is null");
+      }
+
+      final currentExam = state.currentExam!;
+
+      final savedQuestions = questions.map((question) {
+        return SavedQuestionEntity(
+          id: question.id,
+          question: question.question,
+          correctAnswer: question.correct,
+          selectedAnswer: state.selectedAnswers[question.id] ?? '',
+          answers: question.answers.map((answer) {
+            return SavedAnswerEntity(key: answer.key, answer: answer.answer);
+          }).toList(),
+        );
+      }).toList();
+
+      final savedExam = SavedExamEntity(
+        examId: currentExam.id,
+        title: currentExam.title,
+        submittedAt: DateTime.now(),
+        totalQuestions: totalQuestions,
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers,
+        percentage: result.percentage,
+        questions: savedQuestions,
+      );
+
+      await saveExamUseCase(savedExam);
+
       emit(
         state.copyWith(
           submitExam: state.submitExam.copyWith(isLoading: false, data: result),
@@ -219,7 +268,14 @@ class ExamCubit extends Cubit<ExamState> {
     for (final question in questions) {
       final selected = state.selectedAnswers[question.id];
 
-      if (selected == question.correct) {
+      if (selected == null) continue;
+
+      final correctAnswers = question.correct
+          .split(',')
+          .map((e) => e.trim())
+          .toList();
+
+      if (correctAnswers.contains(selected)) {
         correct++;
       }
     }
@@ -233,5 +289,21 @@ class ExamCubit extends Cubit<ExamState> {
     emit(state.copyWith(remainingSeconds: 0, isExamFinished: true));
 
     await _submitExam();
+  }
+
+  Future<void> _getSavedExams() async {
+    final exams = await getSavedExamsUseCase();
+
+    emit(state.copyWith(savedExams: state.savedExams.copyWith(data: exams)));
+  }
+
+  Future<void> _getSavedExam(String id) async {
+    final exam = await getSavedExamUseCase(id);
+
+    emit(
+      state.copyWith(
+        selectedSavedExam: state.selectedSavedExam.copyWith(data: exam),
+      ),
+    );
   }
 }

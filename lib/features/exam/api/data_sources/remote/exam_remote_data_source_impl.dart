@@ -34,9 +34,10 @@ class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse<QuestionResponse>> getQuestions(String examId) async{
+  Future<BaseResponse<QuestionResponse>> getQuestions(String examId) async {
     try {
-      final questionResponse =await apiClient.getQuestions(examId);
+      final questionResponse = await apiClient.getQuestions(examId);
+
       return SuccessResponse(questionResponse);
     } on Exception catch (e) {
       return ApiErrorHandler.handleException(e);

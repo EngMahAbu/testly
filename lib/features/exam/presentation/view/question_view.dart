@@ -4,6 +4,7 @@ import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_images.dart';
 import 'package:testly/core/constants/app_strings.dart';
+import 'package:testly/features/exam/domain/entities/exam_entity.dart';
 import 'package:testly/features/exam/presentation/view/exam_score_view.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_cubit.dart';
 import 'package:testly/features/exam/presentation/view_model/exam_feat_cubit/exam_events.dart';
@@ -17,26 +18,25 @@ class QuestionsView extends StatelessWidget {
   const QuestionsView({
     super.key,
     required this.examTime,
-    required this.examId,
+    required this.examId, required this.exam,
   });
   final int examTime;
   final String examId;
+  final ExamEntity exam;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ExamCubit>(
       create: (_) =>
           getIt.get<ExamCubit>()
-            ..doEvent(GetQuestions(examId: examId, examTime: examTime)),
+            ..doEvent(GetQuestions( exam: exam)),
       child: PopScope(
         canPop: false,
         child: Scaffold(
           appBar: AppBar(
-                leading: IconButton(
-          onPressed: () {
-           
-          },
-          icon: Icon(Icons.arrow_back_ios),
-        ),
+            leading: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios),
+            ),
             actionsPadding: EdgeInsets.only(right: 16),
             title: Text("Exam"),
             actions: [

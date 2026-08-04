@@ -43,6 +43,7 @@ class ExamInstructionsView extends StatelessWidget {
                     builder: (context) => QuestionsView(
                       examTime: exams.duration,
                       examId: exams.id,
+                      exam: exams,
                     ),
                   ),
                 );

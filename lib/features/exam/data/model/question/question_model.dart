@@ -19,8 +19,10 @@ class QuestionModel {
   final List<AnswerModel> answers;
   final String type;
   final String correct;
-  final SubjectModel subject;
-  final ExamModel exam;
+
+  final SubjectModel? subject;
+  final ExamModel? exam;
+
   final String createdAt;
 
   const QuestionModel({
@@ -29,8 +31,8 @@ class QuestionModel {
     required this.answers,
     required this.type,
     required this.correct,
-    required this.subject,
-    required this.exam,
+    this.subject,
+    this.exam,
     required this.createdAt,
   });
 
@@ -46,8 +48,8 @@ class QuestionModel {
       answers: answers.map((e) => e.toEntity()).toList(),
       type: type,
       correct: correct,
-      subject: subject.toEntity(),
-      exam: exam.toEntity(),
+      subject: subject?.toEntity(),
+      exam: exam?.toEntity(),
       createdAt: createdAt,
     );
   }
