@@ -1,5 +1,23 @@
 abstract final class AppStrings {
   // UI Strings
+  static const String signupScreenTitle = 'Sign Up';
+  static const String usernameTextFieldLabel = 'User name';
+  static const String usernameTextFieldHint = 'Enter your user name';
+  static const String firstNameTextFieldLabel = 'First name';
+  static const String firstNameTextFieldHint = 'Enter first name';
+  static const String lastNameTextFieldLabel = 'Last name';
+  static const String lastNameTextFieldHint = 'Enter last name';
+  static const String emailTextFieldLabel = 'Email';
+  static const String emailTextFieldHint = 'Enter your email';
+  static const String passwordTextFieldLabel = 'Password';
+  static const String passwordTextFieldHint = 'Enter password';
+  static const String confirmPasswordTextFieldLabel = 'Confirm password';
+  static const String confirmPasswordTextFieldHint = 'Confirm password';
+  static const String phoneNumberTextFieldLabel = 'Phone number';
+  static const String phoneNumberTextFieldHint = 'Enter phone number';
+  static const String signupButton = 'Signup';
+  static const String alreadyHaveAccount = 'Already have an account?';
+  static const String loginButton = 'Login';
 
   // API Response Messages
   static const String generalErrorMessage =
