@@ -61,9 +61,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     );
                   },
                 );
+                _forgetPasswordViewModel.toggleVerificationCodeDialog(true);
               } else if (state.verifyResetCode!.data != null) {
                 // TODO: Modify this when endpoint is fixed
-                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -73,7 +73,6 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   ),
                 );
               } else if (state.verifyResetCode!.errorMessage.isNotEmpty) {
-                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.verifyResetCode!.errorMessage),
@@ -82,7 +81,26 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 );
               }
             case PasswordResetSection():
-              print('object');
+              // TODO: Modify this when endpoint is fixed
+              if (state.resetPassword!.data != null &&
+                  !state.resetPassword!.isLoading) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${state.resetPassword!.data?.firstName} Successful',
+                    ),
+                    backgroundColor: AppColors.blue,
+                  ),
+                );
+              } else if (state.resetPassword!.errorMessage.isNotEmpty &&
+                  !state.resetPassword!.isLoading) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.resetPassword!.errorMessage),
+                    backgroundColor: AppColors.lightRed,
+                  ),
+                );
+              }
           }
         },
         child: Scaffold(
@@ -99,6 +117,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     forgetPasswordViewModel: _forgetPasswordViewModel,
                   );
                 case PasswordResetSection():
+                  if (_forgetPasswordViewModel.isVerificationCodeDialogShown) {
+                    Navigator.pop(context);
+                    _forgetPasswordViewModel.toggleVerificationCodeDialog(
+                      false,
+                    );
+                  }
                   return ResetSection(
                     forgetPasswordViewModel: _forgetPasswordViewModel,
                   );
