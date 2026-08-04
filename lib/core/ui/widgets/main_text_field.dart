@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:testly/config/form_validator/form_validator.dart';
 import 'package:testly/core/constants/app_colors.dart';
+import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 
 class MainTextField extends StatelessWidget {
@@ -7,14 +9,29 @@ class MainTextField extends StatelessWidget {
   final String hint;
   final TextStyle labelStyle;
   final TextStyle hintStyle;
+  final TextEditingController? _controller;
+  final String? Function(String?)? validator;
+  final String? validationPattern;
+  final String? validationErrorMessage;
 
-  const MainTextField({
+  MainTextField({
     super.key,
     required this.label,
     required this.hint,
     this.labelStyle = AppStyles.textFieldLabel,
     this.hintStyle = AppStyles.textFieldHint,
-  });
+    TextEditingController? controller,
+    this.validator,
+    this.validationPattern,
+    this.validationErrorMessage,
+  }) : _controller = controller {
+    assert(
+      !(validationPattern != null &&
+          validationErrorMessage != null &&
+          validator != null),
+      "You can either provide a custom validator or provide the validation pattern and error.",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +46,24 @@ class MainTextField extends StatelessWidget {
         hintText: hint,
         hintStyle: hintStyle,
       ),
+      controller: _controller,
+      validator: validator ?? defaultValidator,
     );
+  }
+
+  String? defaultValidator(String? input) {
+    if (input == null) {
+      return AppStrings.generalValidationError;
+    }
+
+    if (input.isEmpty) {
+      return AppStrings.emptyValidationError;
+    }
+
+    if (!FormValidator.validate(validationPattern!, input)) {
+      return validationErrorMessage;
+    }
+
+    return null;
   }
 }

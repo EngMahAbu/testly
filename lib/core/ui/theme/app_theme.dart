@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_constants.dart';
+import 'package:testly/core/constants/app_styles.dart';
 
 class AppTheme {
   AppTheme._();
@@ -10,13 +11,9 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.white,
 
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(
-        color: AppColors.blackShade,
-        fontSize: 20,
-        fontFamily: AppConstant.appFont,
-        fontWeight: FontWeight.w500,
-      ),
+      titleTextStyle: AppStyles.screenTitle,
       elevation: 0,
+      titleSpacing: 0,
       backgroundColor: AppColors.white,
       iconTheme: IconThemeData(color: AppColors.black, size: 24),
     ),
