@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:testly/config/base_response/base_response.dart';
+import 'package:testly/config/di/di.config.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_app_bar.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
+import 'package:testly/features/auth/data/models/signup_request.dart';
+import 'package:testly/features/auth/domain/entities/user_entity.dart';
+import 'package:testly/features/auth/domain/use_cases/signup_use_case.dart';
 
-class SignupView extends StatelessWidget {
+class SignupView extends StatefulWidget {
   const SignupView({super.key});
+
+  @override
+  State<SignupView> createState() => _SignupViewState();
+}
+
+class _SignupViewState extends State<SignupView> {
+  SignupUseCase signupUseCase = getIt.get<SignupUseCase>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +30,7 @@ class SignupView extends StatelessWidget {
           horizontal: 16,
         ).copyWith(top: 24),
         child: Form(
+          key: formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -74,7 +88,39 @@ class SignupView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      // {
+                      //     "username": "houda750",
+                      //     "firstName": "Mahmoud",
+                      //     "lastName": "Hijazy",
+                      //     "email": "houda750@route.com",
+                      //     "password": "Route@123",
+                      //     "rePassword": "Route@123",
+                      //     "phone": "01094155711"
+                      // }
+                      final BaseResponse<UserEntity> response =
+                          await signupUseCase(
+                            SignupRequest(
+                              username: 'houda750',
+                              firstName: 'Mahmoud',
+                              lastName: 'Hijazy',
+                              email: 'houda750@route.com',
+                              password: 'Route@123',
+                              rePassword: 'Route@123',
+                              phone: '01094155711',
+                            ),
+                          );
+
+                      switch (response) {
+                        case SuccessResponse<UserEntity>():
+                          print(
+                            '@@@ username: ${response.data?.username} created',
+                          );
+                        case ErrorResponse<UserEntity>():
+                          print('### Error:${response.error.toString()}');
+                      }
+                      // formKey.currentState?.validate();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue,
                     ),
