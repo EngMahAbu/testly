@@ -5,18 +5,23 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? leadingIcon;
   final String title;
   final List<Widget>? actions;
+  final bool hideLeading;
 
   const MainAppBar({
     super.key,
     this.leadingIcon,
     required this.title,
     this.actions,
+    this.hideLeading = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: (leadingIcon != null)
+      automaticallyImplyLeading: !hideLeading,
+      leading: (hideLeading)
+          ? null
+          : (leadingIcon != null)
           ? Padding(
               padding: EdgeInsetsDirectional.only(start: 16.0),
               child: IconButton(
@@ -35,8 +40,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: Icon(Icons.arrow_back_ios, color: AppColors.black),
               ),
             ),
-      // TODO: optimize this title (make it bold) in UI optimization
-      title: Text(title),
+      title: Padding(
+        padding: EdgeInsetsDirectional.only(start: (hideLeading) ? 16 : 0),
+        // TODO: optimize this title (make it bold) in UI optimization
+        child: Text(title),
+      ),
       actions: actions,
     );
   }

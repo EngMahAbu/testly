@@ -47,6 +47,15 @@ abstract final class AppStyles {
     decorationColor: AppColors.blue,
   );
 
+  static const TextStyle defaultTextButton = TextStyle(
+    color: AppColors.blue,
+    fontWeight: FontWeight.w500,
+    fontFamily: AppConstants.appFont,
+    decoration: TextDecoration.none,
+    fontSize: 14,
+    decorationColor: AppColors.blue,
+  );
+
   static const TextStyle bold18Text = TextStyle(
     color: AppColors.black,
     fontWeight: FontWeight.bold,
