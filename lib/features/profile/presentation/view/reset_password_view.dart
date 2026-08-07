@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/config/di/di.config.dart';
+import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_app_bar.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
+import 'package:testly/features/profile/presentation/view_model/profile_event.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_state.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_view_model.dart';
 
@@ -30,7 +32,25 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     return BlocProvider<ProfileViewModel>(
       create: (context) => _profileViewModel,
       child: BlocListener<ProfileViewModel, ProfileState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.changePassword.data != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Password changed successfully'),
+                backgroundColor: AppColors.blue,
+              ),
+            );
+            Navigator.pop(context);
+          }
+          if (state.changePassword.errorMessage.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.changePassword.errorMessage),
+                backgroundColor: AppColors.lightRed,
+              ),
+            );
+          }
+        },
         child: _buildResetPasswordScreen(size),
       ),
     );
@@ -65,12 +85,28 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   Widget _buildMainButton() {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
-        onPressed: null,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: Text(AppStrings.update, style: AppStyles.elevatedButton),
-        ),
+      child: BlocBuilder<ProfileViewModel, ProfileState>(
+        builder: (context, state) {
+          return ElevatedButton(
+            onPressed: state.changePassword.isLoading
+                ? null
+                : () {
+                    _profileViewModel.doEvent(
+                      ChangePasswordEvent(
+                        oldPassword: _currentPasswordController.text,
+                        password: _newPasswordController.text,
+                        rePassword: _confirmPasswordController.text,
+                      ),
+                    );
+                  },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              child: state.changePassword.isLoading
+                  ? const CircularProgressIndicator(color: AppColors.white)
+                  : Text(AppStrings.update, style: AppStyles.elevatedButton),
+            ),
+          );
+        },
       ),
     );
   }

@@ -7,7 +7,10 @@ import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/core/constants/app_styles.dart';
 import 'package:testly/core/ui/widgets/main_app_bar.dart';
 import 'package:testly/core/ui/widgets/main_text_field.dart';
+import 'package:testly/features/auth/domain/entities/user_entity.dart';
+import 'package:testly/features/profile/data/models/edit_profile_request.dart';
 import 'package:testly/features/profile/presentation/view/reset_password_view.dart';
+import 'package:testly/features/profile/presentation/view_model/profile_event.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_state.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_view_model.dart';
 
@@ -30,12 +33,14 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
-    _userNameController = TextEditingController(text: 'Mohamed_Ahmed123');
-    _firstNameController = TextEditingController(text: 'Mohamed');
-    _lastNameController = TextEditingController(text: 'Ahmed');
-    _emailController = TextEditingController(text: 'Mohamed098@gmail.com');
-    _passwordController = TextEditingController(text: '********');
-    _phoneController = TextEditingController(text: '1234567890987');
+    _userNameController = TextEditingController();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _phoneController = TextEditingController();
+
+    _profileViewModel.doEvent(GetProfileDataEvent());
   }
 
   @override
@@ -45,10 +50,62 @@ class _ProfileViewState extends State<ProfileView> {
     return BlocProvider<ProfileViewModel>(
       create: (context) => _profileViewModel,
       child: BlocListener<ProfileViewModel, ProfileState>(
-        listener: (context, state) {},
-        child: _buildProfileScreen(size),
+        listener: (context, state) {
+          if (state.profileData.data != null &&
+              state.currentProfileInfo == null) {
+            final user = state.profileData.data!;
+            _populateProfileDataTextFields(user);
+          }
+
+          if (state.currentProfileInfo != null) {
+            _populateProfileDataTextFields(state.currentProfileInfo!);
+          }
+
+          if (state.updateProfile.data != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Profile updated successfully'),
+                backgroundColor: AppColors.blue,
+              ),
+            );
+          }
+
+          if (state.updateProfile.errorMessage.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.updateProfile.errorMessage),
+                backgroundColor: AppColors.lightRed,
+              ),
+            );
+          }
+        },
+        child: Stack(
+          children: [
+            _buildProfileScreen(size),
+            BlocBuilder<ProfileViewModel, ProfileState>(
+              builder: (context, state) {
+                if (state.profileData.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _populateProfileDataTextFields(dynamic user) {
+    if (user is! UserEntity && user is! EditProfileRequest) {
+      throw 'Invalid user type. Expected UserEntity or EditProfileRequest.';
+    }
+    _userNameController.text = user.username ?? '';
+    _firstNameController.text = user.firstName ?? '';
+    _lastNameController.text = user.lastName ?? '';
+    _emailController.text = user.email ?? '';
+    _passwordController.text = '********';
+    _phoneController.text = user.phone ?? '';
   }
 
   @override
@@ -85,22 +142,32 @@ class _ProfileViewState extends State<ProfileView> {
   Widget _buildMainButton() {
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton(
-        onPressed: null,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: BlocBuilder<ProfileViewModel, ProfileState>(
-            builder: (context, state) {
-              // if (state.signup!.isLoading) {
-              //   return CircularProgressIndicator(
-              //     color: AppColors.white,
-              //   );
-              // } else {
-              return Text(AppStrings.update, style: AppStyles.elevatedButton);
-              // }
-            },
-          ),
-        ),
+      child: BlocBuilder<ProfileViewModel, ProfileState>(
+        builder: (context, state) {
+          return ElevatedButton(
+            onPressed: state.updateProfile.isLoading
+                ? null
+                : () {
+                    _profileViewModel.doEvent(
+                      EditProfileEvent(
+                        EditProfileRequest(
+                          username: _userNameController.text,
+                          firstName: _firstNameController.text,
+                          lastName: _lastNameController.text,
+                          email: _emailController.text,
+                          phone: _phoneController.text,
+                        ),
+                      ),
+                    );
+                  },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              child: state.updateProfile.isLoading
+                  ? const CircularProgressIndicator(color: AppColors.white)
+                  : Text(AppStrings.update, style: AppStyles.elevatedButton),
+            ),
+          );
+        },
       ),
     );
   }
