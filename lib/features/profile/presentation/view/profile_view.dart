@@ -11,15 +11,28 @@ import 'package:testly/features/profile/presentation/view/reset_password_view.da
 import 'package:testly/features/profile/presentation/view_model/profile_state.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_view_model.dart';
 
-class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+class ProfileView extends StatelessWidget {
+  final ProfileViewModel? viewModel;
+
+  const ProfileView({super.key, this.viewModel});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
+  Widget build(BuildContext context) {
+    return BlocProvider<ProfileViewModel>(
+      create: (context) => viewModel ?? getIt<ProfileViewModel>(),
+      child: const ProfileViewBody(),
+    );
+  }
 }
 
-class _ProfileViewState extends State<ProfileView> {
-  final ProfileViewModel _profileViewModel = getIt.get<ProfileViewModel>();
+class ProfileViewBody extends StatefulWidget {
+  const ProfileViewBody({super.key});
+
+  @override
+  State<ProfileViewBody> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileViewBody> {
   late final TextEditingController _userNameController;
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
@@ -30,24 +43,21 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
-    _userNameController = TextEditingController(text: 'Mohamed_Ahmed123');
-    _firstNameController = TextEditingController(text: 'Mohamed');
-    _lastNameController = TextEditingController(text: 'Ahmed');
-    _emailController = TextEditingController(text: 'Mohamed098@gmail.com');
-    _passwordController = TextEditingController(text: '********');
-    _phoneController = TextEditingController(text: '1234567890987');
+    _userNameController = TextEditingController();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _phoneController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
 
-    return BlocProvider<ProfileViewModel>(
-      create: (context) => _profileViewModel,
-      child: BlocListener<ProfileViewModel, ProfileState>(
-        listener: (context, state) {},
-        child: _buildProfileScreen(size),
-      ),
+    return BlocListener<ProfileViewModel, ProfileState>(
+      listener: (context, state) {},
+      child: _buildProfileScreen(size),
     );
   }
 

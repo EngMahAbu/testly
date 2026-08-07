@@ -8,15 +8,28 @@ import 'package:testly/core/ui/widgets/main_text_field.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_state.dart';
 import 'package:testly/features/profile/presentation/view_model/profile_view_model.dart';
 
-class ResetPasswordView extends StatefulWidget {
-  const ResetPasswordView({super.key});
+class ResetPasswordView extends StatelessWidget {
+  final ProfileViewModel? viewModel;
+
+  const ResetPasswordView({super.key, this.viewModel});
 
   @override
-  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+  Widget build(BuildContext context) {
+    return BlocProvider<ProfileViewModel>(
+      create: (context) => viewModel ?? getIt<ProfileViewModel>(),
+      child: const ResetPasswordViewBody(),
+    );
+  }
 }
 
-class _ResetPasswordViewState extends State<ResetPasswordView> {
-  final ProfileViewModel _profileViewModel = getIt.get<ProfileViewModel>();
+class ResetPasswordViewBody extends StatefulWidget {
+  const ResetPasswordViewBody({super.key});
+
+  @override
+  State<ResetPasswordViewBody> createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordViewBody> {
   final TextEditingController _currentPasswordController =
       TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
@@ -27,12 +40,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
 
-    return BlocProvider<ProfileViewModel>(
-      create: (context) => _profileViewModel,
-      child: BlocListener<ProfileViewModel, ProfileState>(
-        listener: (context, state) {},
-        child: _buildResetPasswordScreen(size),
-      ),
+    return BlocListener<ProfileViewModel, ProfileState>(
+      listener: (context, state) {},
+      child: _buildResetPasswordScreen(size),
     );
   }
 
