@@ -35,6 +35,12 @@ abstract final class AppStrings {
       'Password must not be empty and must contain 8 characters with upper- and lower-case letters and one number at least';
   static const newPassword = 'New password';
   static const continueButton = 'Continue';
+  static const String profile = 'Profile';
+  static const String update = 'Update';
+  static const String change = 'Change';
+  static const String currentPassword = 'Current password';
+  static const String invalidPassword = 'Invalid password';
+  static const String passwordNotMatched = 'Password not matched';
 
   // API Response Messages
   static const generalErrorMessage =
