@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_images.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
-import 'package:testly/features/exam/presentation/view/subjects_view.dart';
+import 'package:testly/features/exam/presentation/view/main_navigation_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_state.dart';
 
@@ -40,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         if (state is SplashAuthenticated) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SubjectsView()),
+            MaterialPageRoute(builder: (context) => MainNavigationView()),
           );
         }
 

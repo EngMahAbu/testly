@@ -3,10 +3,7 @@ import 'package:testly/features/exam/data/model/exam/exam_model.dart';
 import 'package:testly/features/exam/data/model/subjects/subject_model.dart';
 import 'package:testly/features/exam/domain/entities/question_entity.dart';
 
- 
 import 'answer_model.dart';
- 
- 
 
 part 'question_model.g.dart';
 

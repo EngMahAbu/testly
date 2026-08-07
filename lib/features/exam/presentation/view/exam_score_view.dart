@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/exam/domain/entities/exam_result_entity.dart';
-import 'package:testly/features/exam/presentation/view/exam_history_view.dart';
+import 'package:testly/features/exam/presentation/view/results_history_view.dart';
+import 'package:testly/features/exam/presentation/view/results_view.dart';
 import 'package:testly/features/exam/presentation/widgets/score_diagram.dart';
 
 class ExamScoreView extends StatelessWidget {
@@ -12,6 +13,7 @@ class ExamScoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -46,9 +48,10 @@ class ExamScoreView extends StatelessWidget {
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
+                  
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ExamHistoryView()),
+                    MaterialPageRoute(builder: (context) => ResultsHistoryView()),
                   );
                 },
                 child: const Text(

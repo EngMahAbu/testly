@@ -15,8 +15,8 @@ import 'package:testly/features/exam/domain/repositories/exam_repository.dart';
 @Singleton(as: ExamRepository)
 class ExamRepositoryImpl implements ExamRepository {
   final ExamRemoteDataSource _examRemoteDataSource;
-   final ExamLocalDataSource localDataSource;
-  ExamRepositoryImpl(this._examRemoteDataSource, this.localDataSource);
+   final ExamLocalDataSource _localDataSource;
+  ExamRepositoryImpl(this._examRemoteDataSource, this._localDataSource);
 
   @override
   Future<BaseResponse<List<SubjectEntity>>> getSubjects() async {
@@ -60,14 +60,14 @@ class ExamRepositoryImpl implements ExamRepository {
 
  @override
   Future<void> saveExam(SavedExamEntity exam) async {
-    await localDataSource.saveExam(
+    await _localDataSource.saveExam(
       SavedExamModel.fromEntity(exam),
     );
   }
 
   @override
   Future<List<SavedExamEntity>> getSavedExams() async {
-    final exams = await localDataSource.getSavedExams();
+    final exams = await _localDataSource.getSavedExams();
 
     return exams
         .map((e) => e.toEntity())
@@ -76,18 +76,18 @@ class ExamRepositoryImpl implements ExamRepository {
 
   @override
   Future<SavedExamEntity?> getExamById(String examId) async {
-    final exam = await localDataSource.getExamById(examId);
+    final exam = await _localDataSource.getExamById(examId);
 
     return exam?.toEntity();
   }
 
   @override
   Future<void> deleteExam(String examId) async {
-    await localDataSource.deleteExam(examId);
+    await _localDataSource.deleteExam(examId);
   }
 
   @override
   Future<void> clearAll() async {
-    await localDataSource.clearAll();
+    await _localDataSource.clearAll();
   }
 }
