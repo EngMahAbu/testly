@@ -7,7 +7,7 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData lightTheme = ThemeData(
-    fontFamily: AppConstant.appFont,
+    fontFamily: AppConstants.appFont,
     scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.white,

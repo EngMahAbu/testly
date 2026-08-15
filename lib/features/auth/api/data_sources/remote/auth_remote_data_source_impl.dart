@@ -7,8 +7,12 @@ import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/data/models/login_response.dart';
 import 'package:testly/features/auth/data/models/password_reset_email_request.dart';
 import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
+import 'package:testly/features/auth/data/models/password_reset_request.dart';
+import 'package:testly/features/auth/data/models/password_reset_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';
+import 'package:testly/features/auth/data/models/verify_reset_code_response.dart';
 
 @Singleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -21,7 +25,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await _authApiClient.login(request);
       return SuccessResponse<LoginResponse>(response);
     } on Exception catch (e) {
-      return ApiErrorHandler.handleException(e);
+      return ApiErrorHandler.handleException<LoginResponse>(e);
     }
   }
 
@@ -49,6 +53,34 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
     } on Exception catch (e) {
       return ApiErrorHandler.handleException<PasswordResetEmailResponse>(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<VerifyResetCodeResponse>> verifyResetCode(
+    VerifyResetCodeRequest verifyResetCodeRequest,
+  ) async {
+    try {
+      final verifyResetCodeResponse = await _authApiClient.verifyResetCode(
+        verifyResetCodeRequest,
+      );
+      return SuccessResponse<VerifyResetCodeResponse>(verifyResetCodeResponse);
+    } on Exception catch (e) {
+      return ApiErrorHandler.handleException<VerifyResetCodeResponse>(e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<PasswordResetResponse>> resetPassword(
+    PasswordResetRequest passwordResetRequest,
+  ) async {
+    try {
+      final passwordResetResponse = await _authApiClient.resetPassword(
+        passwordResetRequest,
+      );
+      return SuccessResponse<PasswordResetResponse>(passwordResetResponse);
+    } on Exception catch (e) {
+      return ApiErrorHandler.handleException<PasswordResetResponse>(e);
     }
   }
 }

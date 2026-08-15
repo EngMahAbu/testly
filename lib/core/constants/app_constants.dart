@@ -1,3 +1,3 @@
-abstract final class AppConstant {
+abstract final class AppConstants {
   static const String appFont = "Inter";
 }

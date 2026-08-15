@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:testly/config/storage_module/token_storage.dart';
 import 'package:testly/config/dio/token_service.dart';
+import 'package:testly/config/storage_module/secure_storage_service.dart';
 import 'package:testly/core/constants/endpoints.dart';
 
 @module

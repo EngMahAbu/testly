@@ -1,6 +1,6 @@
-import 'package:testly/config/storage_module/token_storage.dart';
-import 'package:testly/features/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:injectable/injectable.dart';
+import 'package:testly/config/storage_module/secure_storage_service.dart';
+import 'package:testly/features/auth/data/data_sources/local/auth_local_data_source.dart';
 @Injectable(as: AuthLocalDataSource)
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final SecureStorageService storage;

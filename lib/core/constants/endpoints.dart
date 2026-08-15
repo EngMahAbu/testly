@@ -9,4 +9,9 @@ abstract final class Endpoints {
   static const parameterSubject = 'subject';
   static const parameterExam = 'exam';
   static const forgetPassword = 'auth/forgotPassword';
+  static const verifyResetCode = 'auth/verifyResetCode';
+  static const resetPassword = 'auth/resetPassword';
+  static const profileData = 'auth/profileData';
+  static const editProfile = 'auth/editProfile';
+  static const changePassword = 'auth/changePassword';
 }
