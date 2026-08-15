@@ -3,7 +3,6 @@ import 'package:testly/core/constants/app_colors.dart';
 import 'package:testly/core/constants/app_strings.dart';
 import 'package:testly/features/exam/domain/entities/exam_result_entity.dart';
 import 'package:testly/features/exam/presentation/view/results_history_view.dart';
-import 'package:testly/features/exam/presentation/view/results_view.dart';
 import 'package:testly/features/exam/presentation/widgets/score_diagram.dart';
 
 class ExamScoreView extends StatelessWidget {

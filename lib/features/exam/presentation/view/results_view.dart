@@ -93,9 +93,9 @@ class ReviewQuestionCard extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(
                     color: isCorrect
-                        ? AppColors.lightGreen.withOpacity(0.15)
+                        ? AppColors.lightGreen.withValues(alpha: 0.15)
                         : isWrong
-                        ? AppColors.lightRed.withOpacity(0.15)
+                        ? AppColors.lightRed.withValues(alpha: 0.15)
                         : const Color(0xffEDEFF3),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
