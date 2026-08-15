@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testly/features/exam/presentation/view/results_history_view.dart';
 import 'package:testly/features/exam/presentation/view/subjects_view.dart';
+import 'package:testly/features/profile/presentation/view/profile_view.dart';
 
 class MainNavigationView extends StatefulWidget {
   const MainNavigationView({super.key});
@@ -15,7 +16,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
   final List<Widget> pages = const [
     SubjectsView(),
     ResultsHistoryView(),
-    // ProfileView(),
+    ProfileView(),
   ];
 
   @override

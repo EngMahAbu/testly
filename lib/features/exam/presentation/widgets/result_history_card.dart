@@ -56,7 +56,7 @@ class ResultHistoryCard extends StatelessWidget {
                       errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  // const SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
               
@@ -111,21 +111,23 @@ class ResultHistoryCard extends StatelessWidget {
               ),
             ),
 
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16,right: 8),
-                  child: Text(
-                    "Ended: ${duration.year}/${duration.month}/${duration.day}",
-                    style: TextStyle(
-                      color: AppColors.blue,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
+            FittedBox(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16,right: 8),
+                    child: Text( 
+                      "Ended: ${duration.year}/${duration.month}/${duration.day}",
+                      style: TextStyle(
+                        color: AppColors.blue,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-                Text("Time: ${duration.hour}:${duration.minute}")
-              ],
+                  Text("Time: ${duration.hour}:${duration.minute}")
+                ],
+              ),
             ),
           ],
         ),
