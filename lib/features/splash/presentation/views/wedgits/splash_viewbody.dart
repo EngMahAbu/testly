@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_images.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
+import 'package:testly/features/exam/presentation/view/main_navigation_view.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_cubit.dart';
 import 'package:testly/features/splash/presentation/view_models/splash_state.dart';
-import 'package:testly/features/splash/presentation/views/wedgits/test.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -40,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         if (state is SplashAuthenticated) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Test()),
+            MaterialPageRoute(builder: (context) => MainNavigationView()),
           );
         }
 

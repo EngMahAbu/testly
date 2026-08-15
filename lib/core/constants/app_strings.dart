@@ -35,6 +35,12 @@ abstract final class AppStrings {
       'Password must not be empty and must contain 8 characters with upper- and lower-case letters and one number at least';
   static const newPassword = 'New password';
   static const continueButton = 'Continue';
+  static const String profile = 'Profile';
+  static const String update = 'Update';
+  static const String change = 'Change';
+  static const String currentPassword = 'Current password';
+  static const String invalidPassword = 'Invalid password';
+  static const String passwordNotMatched = 'Password not matched';
 
   // API Response Messages
   static const generalErrorMessage =
@@ -86,4 +92,43 @@ abstract final class AppStrings {
   static const String phoneValidationError =
       'Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015 followed by 8 digits.';
   static const String confirmPasswordError = 'Passwords do not match';
+
+  // Exam Feature
+  static const examScreenTitle = 'Survey';
+  static const searchHint = 'Search';
+  static const String browseBySubject = 'Browse by subject';
+  static const String notFoundSubjects = "No subjects available";
+  static const String notFoundExams = 'No exams available';
+  static const String notFoundQuestions = 'No questions available';
+  static const String instructionOne =
+      '• Make sure you have a stable internet connection.';
+  static const String instructionTwo =
+      '• Read each question carefully before answering.';
+  static const String instructionThree =
+      '• Do not leave or refresh the exam page during the test.';
+  static const String instructionFour =
+      '• Submit your exam before the time runs out.';
+  static const String startButton = 'Start';
+  static const String backButton = 'Back';
+  static const String nextButton = 'Next';
+  static const String finishButton = 'Finish';
+  static const String submitButton = 'Submit';
+  static const String cancelButton = 'Cancel';
+  static const String startAgainButton = "Start again";
+  static const String showResultsButton = "Show results";
+  static const String viewScoreButton = 'View score';
+  static const String instructionText = "Instructions";
+  static const String minutesText = "Minutes";
+  static const String enableText = "Enabled";
+  static const String disableText = "Disabled";
+  static const String questionsText = "Questions";
+  static const String questionText = "Question";
+  static const String timeOutText = "Time out !!";
+  static const String finishExamText = "Finish Exam";
+  static const String correctText = "Correct";
+  static const String inCorrectText = "Incorrect";
+  static const String examResultText = 'Exam Result';
+  static const String yourScoreText = "Your score";
+  static const String warningMessageOfFinishExamText =
+      "Are you sure you want to submit your exam?\n\nYou won't be able to change your answers after submission.";
 }

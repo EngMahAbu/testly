@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testly/config/di/di.config.dart';
 import 'package:testly/config/dio/token_service.dart';
 import 'package:testly/features/auth/presentation/login/view/login_view.dart';
+import 'package:testly/features/profile/presentation/view/profile_view.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
@@ -28,6 +29,15 @@ class Test extends StatelessWidget {
               );
             },
             child: Text("Log Out"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileView()),
+              );
+            },
+            child: Text("Profile"),
           ),
      
         ],

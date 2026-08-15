@@ -10,6 +10,8 @@ import 'package:testly/features/auth/data/models/login_request.dart';
 import 'package:testly/features/auth/data/models/login_response.dart';
 import 'package:testly/features/auth/domain/entities/login_entity.dart';
 import 'package:testly/features/auth/domain/repositories/auth_repository.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_request.dart';
+import 'package:testly/features/auth/data/models/password_reset_email_response.dart';
 import 'package:testly/features/auth/data/models/signup_request.dart';
 import 'package:testly/features/auth/data/models/signup_response.dart';
 import 'package:testly/features/auth/data/models/verify_reset_code_request.dart';

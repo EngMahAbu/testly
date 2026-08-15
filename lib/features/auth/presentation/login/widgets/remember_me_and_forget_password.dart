@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testly/core/constants/app_colors.dart';
+import 'package:testly/features/auth/presentation/forget_password/view/forget_password_view.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_view_model.dart';
 import 'package:testly/features/auth/presentation/login/view_model/cubit/login_state.dart';
 
@@ -38,7 +39,12 @@ class _RememberMeAndForgetPasswordState
           ],
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ForgetPasswordView()),
+            );
+          },
           child: Text(
             "Forget password?",
             style: TextStyle(color: AppColors.black),
